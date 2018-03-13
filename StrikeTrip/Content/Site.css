@@ -29,6 +29,7 @@ textarea {
 }
 .parameters {
     padding: 10px;
+    padding-top: 20px;
 }
 .no_flights_table {
     width: 100%;

@@ -1,5 +1,6 @@
 ﻿@using StrikeTrip.Models;
 @using StrikeTrip.UtilityMethods;
+@using StrikeTrip.UtilityMethods;
 
 @model List<Trip>
 
@@ -10,47 +11,46 @@
 
 <div class="container-fluid form_map">
     <div class="row">
+        @*<div class="col-md-1"></div>*@
         <div class="col-md-4">
 
 
 
-            <h1>Pick Your Poison</h1>
-            @using (Html.BeginForm("Trips", "Home", FormMethod.Get))
-            {
+            <h2>Pick Your Standards</h2>
 
-                <div>
-                    @Html.Label("InputMaxPrice", "Max price")<br />
-                    @Html.TextBox("inputPrice")
-                </div>
+                @using (Html.BeginForm("Trips", "Home", FormMethod.Get))
+                {
 
+                    <div style="padding-left: 45px">
+                        @Html.Label("InputMaxPrice", "Max price")<br />
+                        @Html.TextBox("inputPrice", "500")
 
-                <div>
-                    @Html.Label("InputMinSurfHeight", "Min surf height")<br />
-                    @Html.TextBox("inputHeight")
-                </div>
+                    </div>
+                    <div style="padding-left: 45px">
+                        @Html.Label("InputMinSurfHeight", "Min surf height")<br />
+                        @Html.TextBox("inputHeight", "5")
 
-
-                <div>
-                    @Html.Label("InputDepartureDate", "Departure date")<br />
-                    @Html.TextBox("inputDepartureDate")
-                </div>
-
-
-                <div>
-                    @Html.Label("InputeReturnDate", "Return date")<br />
-                    @Html.TextBox("inputReturnDate")
-                </div>
-
-                <div>
-                    <br />
-                    <button>Submit</button>
-                </div>
+                    </div>
+                    <div style="padding-left: 45px">
+                        @Html.Label("InputDepartureDate", "Departure date")<br />
+                        @Html.TextBox("inputDepartureDate")
+                    </div>
 
 
-            }
+                    <div style="padding-left: 45px">
+                        @Html.Label("InputeReturnDate", "Return date")<br />
+                        @Html.TextBox("inputReturnDate")
+                    </div>
 
-        </div>
-        <div class="col-md-2"></div>
+                    <div style="padding-left: 45px">
+                        <br />
+                        <button>Submit</button>
+                    </div>
+
+
+                }
+
+            </div>
         <div class="col-md-7 form_map">
 
             <iframe src="https://www.google.com/maps/embed?pb=!1m10!1m8!1m3!1d59077773.1831206!2d-22.208032518888704!3d25.343782990169185!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1520951552659" width="600" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
@@ -77,10 +77,10 @@
         {
             <div class="container-fluid parameters">
                 <div class="row">
-                    <div class="col-sm-5">Max price: <strong>Any</strong></div>
-                    <div class="col-sm-5">Min surf height: @Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
-                    <div class="col-sm-5">Departure date: <strong>Any</strong></div>
-                    <div class="col-sm-5">Return date: <strong>Any</strong></div>
+                    <div class="col-xs-6 col-sm-3">Max price: <strong>Any</strong></div>
+                    <div class="col-xs-6 col-sm-3">Min surf height: @Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
+                    <div class="col-xs-6 col-sm-3">Departure date: <strong>Any</strong></div>
+                    <div class="col-xs-6 col-sm-3">Return date: <strong>Any</strong></div>
                 </div>
             </div>
         }
@@ -88,10 +88,10 @@
         {
             <div class="container-fluid parameters">
                 <div class="row">
-                    <div class="col-sm-5">Max price: $@Html.DisplayFor(m => m[0].InputMaxPrice)</div>
-                    <div class="col-sm-5">Min surf height: @Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
-                    <div class="col-sm-5">Departure date: <strong>Any</strong></div>
-                    <div class="col-sm-5">Return date: <strong>Any</strong></div>
+                    <div class="col-xs-6 col-sm-3">Max price: $@Html.DisplayFor(m => m[0].InputMaxPrice)</div>
+                    <div class="col-xs-6 col-sm-3">Min surf height: @Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
+                    <div class="col-xs-6 col-sm-3">Departure date: <strong>Any</strong></div>
+                    <div class="col-xs-6 col-sm-3">Return date: <strong>Any</strong></div>
                 </div>
             </div>
         }
@@ -99,10 +99,10 @@
         {
             <div class="container-fluid parameters">
                 <div class="row">
-                    <div class="col-sm-5">Max price: $@Html.DisplayFor(m => m[0].InputMaxPrice)</div>
-                    <div class="col-sm-5">Min surf height: @Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
-                    <div class="col-sm-5">Departure date: <strong>Any</strong></div>
-                    <div class="col-sm-5">Return date: <strong>Any</strong></div>
+                    <div class="col-xs-6 col-sm-3">Max price: $@Html.DisplayFor(m => m[0].InputMaxPrice)</div>
+                    <div class="col-xs-6 col-sm-3">Min surf height: @Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
+                    <div class="col-xs-6 col-sm-3">Departure date: <strong>Any</strong></div>
+                    <div class="col-xs-6 col-sm-3">Return date: <strong>Any</strong></div>
                 </div>
             </div>
         }
@@ -110,10 +110,10 @@
         {
             <div class="container-fluid parameters">
                 <div class="row">
-                    <div class="col-sm-5">Max price: $@Html.DisplayFor(m => m[0].InputMaxPrice)</div>
-                    <div class="col-sm-5">Min surf height: @Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
-                    <div class="col-sm-5">Departure date: <strong>Any</strong></div>
-                    <div class="col-sm-5">Return date: @Html.DisplayFor(m => m[0].InputReturnDate)</div>
+                    <div class="col-xs-6 col-sm-3">Max price: $@Html.DisplayFor(m => m[0].InputMaxPrice)</div>
+                    <div class="col-xs-6 col-sm-3">Min surf height: @Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
+                    <div class="col-xs-6 col-sm-3">Departure date: <strong>Any</strong></div>
+                    <div class="col-xs-6 col-sm-3">Return date: @Html.DisplayFor(m => m[0].InputReturnDate)</div>
                 </div>
             </div>
         }
@@ -121,10 +121,10 @@
         {
             <div class="container-fluid parameters">
                 <div class="row">
-                    <div class="col-sm-5">Max price: $@Html.DisplayFor(m => m[0].InputMaxPrice)</div>
-                    <div class="col-sm-5">Min surf height: @Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
-                    <div class="col-sm-5">Departure date: @Html.DisplayFor(m => m[0].InputDepartureDate)</div>
-                    <div class="col-sm-5">Return date: <strong>Any</strong></div>
+                    <div class="col-xs-6 col-sm-3">Max price: $@Html.DisplayFor(m => m[0].InputMaxPrice)</div>
+                    <div class="col-xs-6 col-sm-3">Min surf height: @Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
+                    <div class="col-xs-6 col-sm-3">Departure date: @Html.DisplayFor(m => m[0].InputDepartureDate)</div>
+                    <div class="col-xs-6 col-sm-3">Return date: <strong>Any</strong></div>
                 </div>
             </div>
         }
@@ -132,10 +132,10 @@
         {
             <div class="container-fluid parameters">
                 <div class="row">
-                    <div class="col-sm-5">$@Html.DisplayFor(m => m[0].InputMaxPrice)</div>
-                    <div class="col-sm-5">@Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
-                    <div class="col-sm-5">@Html.DisplayFor(m => m[0].InputDepartureDate)</div>
-                    <div class="col-sm-5">@Html.DisplayFor(m => m[0].InputReturnDate)</div>
+                    <div class="col-xs-6 col-sm-3">$@Html.DisplayFor(m => m[0].InputMaxPrice)</div>
+                    <div class="col-xs-6 col-sm-3">@Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
+                    <div class="col-xs-6 col-sm-3">@Html.DisplayFor(m => m[0].InputDepartureDate)</div>
+                    <div class="col-xs-6 col-sm-3">@Html.DisplayFor(m => m[0].InputReturnDate)</div>
                 </div>
             </div>
         }
@@ -171,7 +171,7 @@
     </tr>
 
     @foreach (var item in Model)
-            {
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.LocationName)
