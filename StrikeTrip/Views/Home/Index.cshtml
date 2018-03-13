@@ -1,0 +1,173 @@
+﻿@using StrikeTrip.Models;
+@using StrikeTrip.UtilityMethods;
+
+@model List<Trip>
+
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-fluid form_map">
+    <div class="row">
+        <div class="col-md-4">
+
+
+
+            <h1>Pick Your Poison</h1>
+            @using (Html.BeginForm("Trips", "Home", FormMethod.Get))
+            {
+
+                <div>
+                    @Html.Label("InputMaxPrice", "Max price")<br />
+                    @Html.TextBox("inputPrice")
+                </div>
+
+
+                <div>
+                    @Html.Label("InputMinSurfHeight", "Min surf height")<br />
+                    @Html.TextBox("inputHeight")
+                </div>
+
+
+                <div>
+                    @Html.Label("InputDepartureDate", "Departure date")<br />
+                    @Html.TextBox("inputDepartureDate")
+                </div>
+
+
+                        <div>
+                            @Html.Label("InputeReturnDate", "Return date")<br />
+                            @Html.TextBox("inputReturnDate")
+                        </div>
+
+                                    <div>
+                                        <br />
+                                        <button>Submit</button>
+                                    </div>
+
+
+            }
+
+        </div>
+        <div class="col-md-2"></div>
+        <div class="col-md-7 form_map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d100127014.72967303!2d-83.00880600310423!3d40.0166223583491!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sus!4v1520896175708" width="600" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+        </div>
+    </div>
+</div>
+
+@{ if (Model.Count == 0)
+    { <div class="container-fluid parameters">
+        <div class="row">
+            <div class="col-xs-6 col-sm-3">Max price: <strong class="no_flights_params">$500</strong></div>
+            <div class="col-xs-6 col-sm-3">Min surf height: <strong class="no_flights_params">5ft</strong></div>
+            <div class="col-xs-6 col-sm-3">Departure date: <strong class="no_flights_params">Any</strong></div>
+            <div class="col-xs-6 col-sm-3">Return date: <strong class="no_flights_params">Any</strong></div>
+        </div>
+    </div>
+    }
+    else
+    {
+
+
+        if (Model[0].InputDepartureDate > Utility.GetFutureCompareDate())
+        {
+            <div class="container-fluid parameters">
+                <div class="row">
+                    <div class="col-sm-5">Max price: $@Html.DisplayFor(m => m[0].InputMaxPrice)</div>
+                    <div class="col-sm-5">Min surf height: @Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
+                    <div class="col-sm-5">Departure date: <strong>Any</strong></div>
+                    <div class="col-sm-5">Return date: @Html.DisplayFor(m => m[0].InputReturnDate)</div>
+                </div>
+            </div>
+        }
+        else if (Model[0].InputReturnDate > Utility.GetFutureCompareDate())
+        {
+            <div class="container-fluid parameters">
+                <div class="row">
+                    <div class="col-sm-5">Max price: $@Html.DisplayFor(m => m[0].InputMaxPrice)</div>
+                    <div class="col-sm-5">Min surf height: @Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
+                    <div class="col-sm-5">Departure date: @Html.DisplayFor(m => m[0].InputDepartureDate)</div>
+                    <div class="col-sm-5">Return date: <strong>Any</strong></div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="container-fluid parameters">
+                <div class="row">
+                    <div class="col-sm-5">$@Html.DisplayFor(m => m[0].InputMaxPrice)</div>
+                    <div class="col-sm-5">@Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
+                    <div class="col-sm-5">@Html.DisplayFor(m => m[0].InputDepartureDate)</div>
+                    <div class="col-sm-5">@Html.DisplayFor(m => m[0].InputReturnDate)</div>
+                </div>
+            </div>
+        }
+
+    }
+}
+
+<div class="separate"></div>
+
+<table class="table">
+    <tr>
+        <th>
+            Location
+        </th>
+        <th>
+            Spot
+        </th>
+        <th>
+            Departure Date
+        </th>
+        <th>
+            Return Date
+        </th>
+        <th>
+            Max Surf Height During Trip
+        </th>
+        <th>
+            Number of Days with Good Surf
+        </th>
+        <th>
+            Flight Price
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+            {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.LocationName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SpotName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DepartureDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ReturnDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaxSurfHeight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NumberOfSurfDays)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("Detailed Forecast", "Details", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
+@if (Model.Count == 0)
+{
+
+    <div class="no_flights_table">No trips are available with the selected characteristics.</div>
+}
