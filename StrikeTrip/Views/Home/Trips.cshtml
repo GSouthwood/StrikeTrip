@@ -41,10 +41,10 @@
                     @Html.TextBox("inputReturnDate")
                 </div>
 
-                        <div>
-                            <br />
-                            <button>Submit</button>
-                        </div>
+                <div>
+                    <br />
+                    <button>Submit</button>
+                </div>
 
 
             }
@@ -72,8 +72,40 @@
     else
     {
 
-
-        if (Model[0].InputDepartureDate > Utility.GetFutureCompareDate())
+        if (Model[0].InputDepartureDate <= Utility.GetPastDate() && Model[0].InputReturnDate > Utility.GetFutureCompareDate() && Model[0].InputMaxPrice > 9999)
+        {
+            <div class="container-fluid parameters">
+                <div class="row">
+                    <div class="col-sm-5">Max price: <strong>Any</strong></div>
+                    <div class="col-sm-5">Min surf height: @Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
+                    <div class="col-sm-5">Departure date: <strong>Any</strong></div>
+                    <div class="col-sm-5">Return date: <strong>Any</strong></div>
+                </div>
+            </div>
+        }
+        else if (Model[0].InputDepartureDate <= Utility.GetPastDate() && Model[0].InputReturnDate > Utility.GetFutureCompareDate())
+        {
+            <div class="container-fluid parameters">
+                <div class="row">
+                    <div class="col-sm-5">Max price: $@Html.DisplayFor(m => m[0].InputMaxPrice)</div>
+                    <div class="col-sm-5">Min surf height: @Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
+                    <div class="col-sm-5">Departure date: <strong>Any</strong></div>
+                    <div class="col-sm-5">Return date: <strong>Any</strong></div>
+                </div>
+            </div>
+        }
+        else if (Model[0].InputDepartureDate <= Utility.GetPastDate() && Model[0].InputReturnDate > Utility.GetFutureCompareDate())
+        {
+            <div class="container-fluid parameters">
+                <div class="row">
+                    <div class="col-sm-5">Max price: $@Html.DisplayFor(m => m[0].InputMaxPrice)</div>
+                    <div class="col-sm-5">Min surf height: @Html.DisplayFor(m => m[0].InputMinSurfHeight)ft</div>
+                    <div class="col-sm-5">Departure date: <strong>Any</strong></div>
+                    <div class="col-sm-5">Return date: <strong>Any</strong></div>
+                </div>
+            </div>
+        }
+        else if (Model[0].InputReturnDate > Utility.GetFutureCompareDate())
         {
             <div class="container-fluid parameters">
                 <div class="row">
@@ -84,7 +116,7 @@
                 </div>
             </div>
         }
-        else if (Model[0].InputReturnDate > Utility.GetFutureCompareDate())
+        else if (Model[0].InputReturnDate <= Utility.GetPastDate())
         {
             <div class="container-fluid parameters">
                 <div class="row">
@@ -147,19 +179,19 @@
                 @Html.DisplayFor(modelItem => item.SpotName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DepartureDate)
+                @item.DepartureDate.ToShortDateString()
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ReturnDate)
+                @item.ReturnDate.ToShortDateString()
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.MaxSurfHeight)
+                @Math.Truncate(item.MaxSurfHeight)ft
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NumberOfSurfDays)
+                @item.SurfDays()
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                $@Math.Truncate(item.Price)
             </td>
             <td>
                 @Html.ActionLink("Detailed Forecast", "Details", new { /* id=item.PrimaryKey */ })

@@ -145,7 +145,7 @@ namespace StrikeTrip.DAL
                         t.MaxSurfHeight = Convert.ToDecimal(reader["max_height"]);
                         t.NumberOfSurfDays = Convert.ToInt32(reader["num_of_days_with_surf"]);
                         t.Price = Convert.ToDecimal(reader["min_flight_price"]);
-                        t.ReturnDate = Convert.ToDateTime(reader["return_date"]);
+                        t.ReturnDate = Convert.ToDateTime(reader["return_date"]).Date;
                         t.SpotName = Convert.ToString(reader["spot_name"]);
 
                         trips.Add(t);
@@ -215,7 +215,7 @@ namespace StrikeTrip.DAL
                         t.MaxSurfHeight = Convert.ToDecimal(reader["max_height"]);
                         t.NumberOfSurfDays = Convert.ToInt32(reader["num_of_days_with_surf"]);
                         t.Price = Convert.ToDecimal(reader["min_flight_price"]);
-                        t.ReturnDate = Convert.ToDateTime(reader["Flight.return_date"]);
+                        t.ReturnDate = Convert.ToDateTime(reader["Flight.return_date"]).Date;
                         t.SpotName = Convert.ToString(reader["Spot.spot_name"]);
 
                         trips.Add(t);
@@ -257,14 +257,14 @@ namespace StrikeTrip.DAL
                             t.InputMaxPrice = 500;
                             t.InputMinSurfHeight = 5;
                             t.InputReturnDate = Utility.GetFutureDate();
-                            t.DepartureDate = Convert.ToDateTime(reader["Flight.departure_date"]);
+                            t.DepartureDate = Convert.ToDateTime(reader["Flight.departure_date"]).Date;
                             t.Latitude = Convert.ToDouble(reader["latitude"]);
                             t.LocationName = Convert.ToString(reader["Destination.name"]);
                             t.Longitude = Convert.ToDouble(reader["longitude"]);
                             t.MaxSurfHeight = Convert.ToDecimal(reader["max_height"]);
                             t.NumberOfSurfDays = Convert.ToInt32(reader["num_of_days_with_surf"]);
                             t.Price = Convert.ToDecimal(reader["min_flight_price"]);
-                            t.ReturnDate = Convert.ToDateTime(reader["Flight.return_date"]);
+                            t.ReturnDate = Convert.ToDateTime(reader["Flight.return_date"]).Date;
                             t.SpotName = Convert.ToString(reader["Spot.spot_name"]);
 
                             trips.Add(t);
@@ -306,14 +306,14 @@ namespace StrikeTrip.DAL
                     {
 
                         Trip t = new Trip();
-                        t.DepartureDate = Convert.ToDateTime(reader["Flight.departure_date"]);
+                        t.DepartureDate = Convert.ToDateTime(reader["Flight.departure_date"]).Date;
                         t.Latitude = Convert.ToDouble(reader["latitude"]);
                         t.LocationName = Convert.ToString(reader["Destination.name"]);
                         t.Longitude = Convert.ToDouble(reader["longitude"]);
                         t.MaxSurfHeight = Convert.ToDecimal(reader["max_height"]);
                         t.NumberOfSurfDays = Convert.ToInt32(reader["num_of_days_with_surf"]);
                         t.Price = Convert.ToDecimal(reader["min_flight_price"]);
-                        t.ReturnDate = Convert.ToDateTime(reader["Flight.return_date"]);
+                        t.ReturnDate = Convert.ToDateTime(reader["Flight.return_date"]).Date;
                         t.SpotName = Convert.ToString(reader["Spot.spot_name"]);
 
                         trips.Add(t);
@@ -348,14 +348,14 @@ namespace StrikeTrip.DAL
                     {
 
                         Trip t = new Trip();
-                        t.DepartureDate = Convert.ToDateTime(reader["Flight.departure_date"]);
+                        t.DepartureDate = Convert.ToDateTime(reader["Flight.departure_date"]).Date;
                         t.Latitude = Convert.ToDouble(reader["latitude"]);
                         t.LocationName = Convert.ToString(reader["Destination.name"]);
                         t.Longitude = Convert.ToDouble(reader["longitude"]);
                         t.MaxSurfHeight = Convert.ToDecimal(reader["max_height"]);
                         t.NumberOfSurfDays = Convert.ToInt32(reader["num_of_days_with_surf"]);
                         t.Price = Convert.ToDecimal(reader["min_flight_price"]);
-                        t.ReturnDate = Convert.ToDateTime(reader["Flight.return_date"]);
+                        t.ReturnDate = Convert.ToDateTime(reader["Flight.return_date"]).Date;
                         t.SpotName = Convert.ToString(reader["Spot.spot_name"]);
 
                         trips.Add(t);

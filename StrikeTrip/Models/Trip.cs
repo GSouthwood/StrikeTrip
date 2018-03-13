@@ -23,5 +23,14 @@ namespace StrikeTrip.Models
         public DateTime InputDepartureDate { get; set; }
         [DataType(DataType.Date)]
         public DateTime InputReturnDate { get; set; }
+       
+        public int SurfDays()
+        {
+            if ((ReturnDate.Day - DepartureDate.Day) < NumberOfSurfDays)
+            {
+                NumberOfSurfDays = ReturnDate.Day - DepartureDate.Day;
+            }
+            return NumberOfSurfDays;
+        }
     }
 }
