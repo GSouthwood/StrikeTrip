@@ -74,7 +74,7 @@
                 </div>
                 <div style="padding-left: 45px">
                     <br />
-                    <button>Submit</button>
+                    <button style="box-shadow: none;">Submit</button>
                 </div>
 
 
@@ -170,7 +170,7 @@
                     $@Math.Truncate(item.Price)
                 </td>
                 <td>
-                    @Html.ActionLink("Detailed Forecast", "Forecast", new { id = Model[0].SpotName })
+                    @Html.ActionLink("Forecast", "Forecast", new { id = Model[0].SpotName }, new { @class = "details_button" })
                 </td>
             </tr>
         }

@@ -1,8 +1,12 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    background-color: lightgray;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
-
+h1, h2, h3, h4 {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
 /* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
@@ -35,11 +39,13 @@ textarea {
     width: 100%;
     padding-top: 50px;
     height: 200px;
-    color: lightcoral;
+    color: red;
+    opacity: .7;
     text-align: center;
 }
 .no_flights_params {
-    color: lightcoral;
+    color: red;
+    opacity: .7;
     padding: 10px;
 }
 .form_map {
@@ -50,11 +56,24 @@ textarea {
     height: 100%;
 }
 button {
-    background: black;
+    background: #222222;
     color: white;
-
 }
-button:hover {
-    background: #343232;
+    button:hover {
+        background: #343232;
+        color: #d3d3d3;
+    }
+.details_button {
+    background-color: #222222;
     color: white;
+    padding: 5px;
+    border-radius: 1px;
+    font-size: small;
+}
+.details_button:hover {
+    text-decoration: none;
+    color: #d3d3d3;
+}
+.about_para {
+    margin: 50px 100px 100px 50px; 
 }
