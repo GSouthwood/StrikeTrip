@@ -49,3 +49,12 @@ textarea {
 #map {
     height: 100%;
 }
+button {
+    background: black;
+    color: white;
+
+}
+button:hover {
+    background: #343232;
+    color: white;
+}

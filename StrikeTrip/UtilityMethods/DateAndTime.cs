@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace StrikeTrip.UtilityMethods
 {
-    public class Utility
+    public class DateAndTime
     {
         public static List<TimeSpan> LoadTimes()
         {

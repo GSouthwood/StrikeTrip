@@ -16,67 +16,46 @@ namespace StrikeTrip.Controllers
         public ActionResult Index()
         {
             TripSqlDal tripSqlDal = new TripSqlDal(connectionString);
-            List<Trip> trips = tripSqlDal.GetTripsDefault();
+            List<Trip> trips = tripSqlDal.TripsFromInput("500", "", "", "5");
+
+            if (trips.Count == 0)
+            {
+
+                if (trips.Count == 0)
+                {
+                    Trip trip = new Trip("500", "", "", "5");
+
+                    trips.Add(trip);
+                }
+            }
+            ViewBag.Latitude = trips[0].Latitude;
+            ViewBag.Longitude = trips[0].Longitude‎;
 
             return View("Index", trips);
         }
         public ActionResult Trips(string inputPrice, string inputDepartureDate, string inputReturnDate, string inputHeight)
         {
-            bool isDeparture = false;
-            int departure = 0;
-            int returning = 0;
-            int price = 0;
-            int both = 0;
-            if (inputPrice != "")
-            {
-                price = Int32.Parse(inputPrice);
-            }
-            int height = 0;
-            if (inputHeight != "")
-            {
-                height = Int32.Parse(inputHeight);
-            }
-            DateTime departDate = Utility.GetPastDate();
-            if (inputDepartureDate != "" && inputReturnDate == "")
-            {
-                departDate = DateTime.Parse(inputDepartureDate);
-                isDeparture = true;
-                departure++;
-            }
-            DateTime returnDate = Utility.GetFutureDate();
-            if (inputReturnDate != "" && inputDepartureDate != "")
-            {
-                returnDate = DateTime.Parse(inputReturnDate);
-                departDate = DateTime.Parse(inputDepartureDate);
-                both++;
-            }
-            if (inputDepartureDate == "" && inputReturnDate != "")
-            {
-                departDate = DateTime.Parse(inputDepartureDate);
-                isDeparture = false;
-                returning++;
-            }
             TripSqlDal tripSqlDal = new TripSqlDal(connectionString);
-            List<Trip> trips = new List<Trip>();
-            if ((departure == 0 && returning == 0) || both > 0)
+            List<Trip> trips = tripSqlDal.TripsFromInput(inputPrice, inputDepartureDate, inputReturnDate, inputHeight);
+            
+            if (trips.Count == 0)
             {
-                trips = tripSqlDal.GetTripsFromInput(height, departDate, returnDate, price);
+                Trip trip = new Trip(inputPrice, inputDepartureDate, inputReturnDate, inputHeight);
+
+                trips.Add(trip);
             }
-            if (departure > 0)
-            {
-                trips = tripSqlDal.GetTripsFromInput(height, departDate, isDeparture, price);
-            }
-            if (returning > 0)
-            {
-                trips = tripSqlDal.GetTripsFromInput(height, returnDate, isDeparture, price);
-            }
+            ViewBag.Latitude = trips[0].Latitude;
+            ViewBag.Longitude = trips[0].Longitude‎;
             
 
             return View("Trips", trips);
         }
-        public ActionResult Forecasts()
+        public ActionResult Forecast(string id)
         {
-            return View("Index");
+            ForecastDaySqlDal forecastDaySql = new ForecastDaySqlDal(connectionString);
+            List<ForecastDay> forecast = forecastDaySql.GetDetailedForecast(id);
+
+            return View("Forecast", forecast);
         }
 
         public ActionResult About()

@@ -9,18 +9,37 @@
             src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.11/jquery-ui.min.js"></script>
     <script type="text/javascript" charset="utf-8"
             src="http://maps.google.com/maps/api/js?key=AIzaSyBhhJwEJgDUZij9MfSDhrP5t4vIy7RAoMc"></script>
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    
+</head>
+<body>
     <script type="text/javascript">
-        var center = new google.maps.LatLng(-34.397, 150.644);
+        var center = new google.maps.LatLng(0, -180);
         $(document).ready(function () {
             map = new google.maps.Map(document.getElementById("map"), {
-                zoom: 6,
+                zoom: 1.5,
                 center: center,
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
+
+            var flightPlanCoordinates = [
+                { lat: 33.941589, lng: -118.408530 },
+                //{ lat: 21.291, lng: -157.821 },
+                //{ lat: -18.142, lng: 178.431 },
+                { lat: -27.467, lng: 153.027 }
+            ];
+            var flightPath = new google.maps.Polyline({
+                path: flightPlanCoordinates,
+                geodesic: true,
+                strokeColor: '#FF0000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2
+            });
+
+            flightPath.setMap(map);
         });
     </script>
-</head>
-<body>
+
     <div id="map_wrap" style="position: absolute; top: 200px; bottom: 200px; left: 300px; right: 300px;">
         <div id="map" style="width: 100%; height: 100%;">
         </div>
