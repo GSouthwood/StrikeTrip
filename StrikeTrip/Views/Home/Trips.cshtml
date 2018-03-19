@@ -92,10 +92,11 @@
     {
         <div class="container-fluid parameters">
             <div class="row">
-                <div class="col-xs-6 col-sm-3">Price: <strong class="no_flights_params">@Model[0].PriceString(Model[0].InputMaxPrice)</strong></div>
-                <div class="col-xs-6 col-sm-3">Surf height: <strong class="no_flights_params">@Model[0].SurfHeightString(Model[0].InputMinSurfHeight)</strong></div>
-                <div class="col-xs-6 col-sm-3">Departure date: <strong class="no_flights_params">@Model[0].DateTimeString(Model[0].InputDepartureDate)</strong></div>
-                <div class="col-xs-6 col-sm-3">Return date: <strong class="no_flights_params">@Model[0].DateTimeString(Model[0].InputReturnDate)</strong></div>
+                <div class="col-sm-2"></div>
+                <div class="col-xs-6 col-sm-2">Price: <strong class="no_flights_params">@Model[0].PriceString(Model[0].InputMaxPrice)</strong></div>
+                <div class="col-xs-6 col-sm-2">Surf height: <strong class="no_flights_params">@Model[0].SurfHeightString(Model[0].InputMinSurfHeight)</strong></div>
+                <div class="col-xs-6 col-sm-2">Departure date: <strong class="no_flights_params">@Model[0].DateTimeString(Model[0].InputDepartureDate)</strong></div>
+                <div class="col-xs-6 col-sm-2">Return date: <strong class="no_flights_params">@Model[0].DateTimeString(Model[0].InputReturnDate)</strong></div>
             </div>
         </div>
     }
@@ -168,7 +169,7 @@
                     $@Math.Truncate(item.Price)
                 </td>
                 <td>
-                    @Html.ActionLink("Forecast", "Forecast", new { id = Model[0].SpotName }, new { @class = "details_button" })
+                    @Html.ActionLink("Forecast", "Forecast", new { id = item.SpotName }, new { @class = "details_button" })
                 </td>
             </tr>
         }

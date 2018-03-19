@@ -19,6 +19,9 @@ h1, h2, h3, h4 {
 .dl-horizontal dt {
     white-space: normal;
 }
+th {
+    border-bottom: 1px solid black;
+}
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
@@ -75,5 +78,5 @@ button {
     color: #d3d3d3;
 }
 .about_para {
-    margin: 50px 100px 100px 50px; 
+    margin: 50px 600px 100px 50px; 
 }

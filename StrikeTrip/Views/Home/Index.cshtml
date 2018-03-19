@@ -143,6 +143,7 @@
             Flight Price
         </th>
     </tr>
+    
     @if (Model.Count >= 1 && Model[0].LocationName != null)
     {
         foreach (var item in Model)
@@ -170,7 +171,7 @@
                     $@Math.Truncate(item.Price)
                 </td>
                 <td>
-                    @Html.ActionLink("Forecast", "Forecast", new { id = Model[0].SpotName }, new { @class = "details_button" })
+                    @Html.ActionLink("Forecast", "Forecast", new { id = item.SpotName }, new { @class = "details_button" })
                 </td>
             </tr>
         }

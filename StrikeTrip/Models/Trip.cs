@@ -48,9 +48,13 @@ namespace StrikeTrip.Models
 
         public int SurfDays()
         {
-            if ((ReturnDate.Day - DepartureDate.Day) < NumberOfSurfDays)
+            if ((ReturnDate.DayOfYear - DepartureDate.DayOfYear) < NumberOfSurfDays)
             {
-                NumberOfSurfDays = ReturnDate.Day - DepartureDate.Day;
+                NumberOfSurfDays = Math.Abs(ReturnDate.DayOfYear - DepartureDate.DayOfYear);
+            }
+            else if (ReturnDate.DayOfYear < DepartureDate.DayOfYear)
+            {
+                NumberOfSurfDays = Math.Abs((365 + ReturnDate.DayOfYear) - DepartureDate.DayOfYear);
             }
             return NumberOfSurfDays;
         }

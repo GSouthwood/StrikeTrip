@@ -119,8 +119,8 @@ namespace StrikeTrip.DAL
             "JOIN Destination ON Flight.airport_code = Destination.airport_code " +
             "JOIN Surf ON Destination.location_id = Surf.location_id " +
             "WHERE swell_height_feet > @inputMinSurfHeight " +
-            "AND Surf.forecast_for_date > @inputDepartureDate " +
-            "AND Surf.forecast_for_date < @inputReturnDate " +
+            "AND Surf.forecast_for_date > Flight.departure_date " +
+            "AND Surf.forecast_for_date < Flight.return_date " +
             "AND price < @inputMaxPrice " +
             "AND Surf.log_id IN (SELECT TOP 80 Surf.log_id FROM Surf " +
             "ORDER BY Surf.log_id DESC) " +
