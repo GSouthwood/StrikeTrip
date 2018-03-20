@@ -94,10 +94,16 @@
     {
         <div class="container-fluid parameters">
             <div class="row">
-                <div class="col-xs-6 col-sm-3">Price: <strong class="no_flights_params">@Model[0].PriceString(Model[0].InputMaxPrice)</strong></div>
-                <div class="col-xs-6 col-sm-3">Surf height: <strong class="no_flights_params">@Model[0].SurfHeightString(Model[0].InputMinSurfHeight)</strong></div>
-                <div class="col-xs-6 col-sm-3">Departure date: <strong class="no_flights_params">@Model[0].DateTimeString(Model[0].InputDepartureDate)</strong></div>
-                <div class="col-xs-6 col-sm-3">Return date: <strong class="no_flights_params">@Model[0].DateTimeString(Model[0].InputReturnDate)</strong></div>
+                <div class="col-sm-4"></div>
+                <div class="col-xs-6 col-sm-2">Price: <strong class="no_flights_params">@Model[0].PriceString(Model[0].InputMaxPrice)</strong></div>
+                <div class="col-xs-6 col-sm-2">Surf height: <strong class="no_flights_params">@Model[0].SurfHeightString(Model[0].InputMinSurfHeight)</strong></div>
+                <div class="col-sm-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-xs-6 col-sm-2">Departure: <strong class="no_flights_params">@Model[0].DateTimeString(Model[0].InputDepartureDate)</strong></div>
+                <div class="col-xs-6 col-sm-2">Return: <strong class="no_flights_params">@Model[0].DateTimeString(Model[0].InputReturnDate)</strong></div>
+                <div class="col-sm-4"></div>
             </div>
         </div>
     }
@@ -106,10 +112,16 @@
 
         <div class="container-fluid parameters">
             <div class="row">
-                <div class="col-xs-6 col-sm-3">Max price: <strong>@Model[0].PriceString(Model[0].InputMaxPrice)</strong></div>
-                <div class="col-xs-6 col-sm-3">Min surf height: <strong>@Model[0].SurfHeightString(Model[0].InputMinSurfHeight)</strong></div>
-                <div class="col-xs-6 col-sm-3">Departure date: <strong>@Model[0].DateTimeString(Model[0].InputDepartureDate)</strong></div>
-                <div class="col-xs-6 col-sm-3">Return date: <strong>@Model[0].DateTimeString(Model[0].InputReturnDate)</strong></div>
+                <div class="col-sm-4"></div>
+                <div class="col-xs-6 col-sm-2">Price: <strong>@Model[0].PriceString(Model[0].InputMaxPrice)</strong></div>
+                <div class="col-xs-6 col-sm-2">Surf height: <strong>@Model[0].SurfHeightString(Model[0].InputMinSurfHeight)</strong></div>
+                <div class="col-sm-4"></div>
+            </div>
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-xs-6 col-sm-2">Departure: <strong>@Model[0].DateTimeString(Model[0].InputDepartureDate)</strong></div>
+                <div class="col-xs-6 col-sm-2">Return: <strong>@Model[0].DateTimeString(Model[0].InputReturnDate)</strong></div>
+                <div class="col-sm-4"></div>
             </div>
         </div>
 
