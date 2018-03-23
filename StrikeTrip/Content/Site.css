@@ -33,6 +33,7 @@ textarea {
     width: 100%;
     height: 5px;
     background-color: #222222;
+    
 }
 .parameters {
     padding: 10px;
@@ -54,9 +55,13 @@ textarea {
 .form_map {
     padding-bottom: 20px;
     padding-top: 30px;
+    width: 100%;
+    
+
 }
 #map {
     height: 100%;
+    
 }
 button {
     background: #222222;
@@ -80,3 +85,19 @@ button {
 .about_para {
     margin: 50px 600px 100px 50px; 
 }
+tr.highlight {
+    border: solid;
+    border-color: #52b544;
+    border-right-style: groove;
+    padding: 2em;
+    
+    color: green;
+
+    
+}
+.scrollit {
+    overflow: scroll;
+    overflow-x: hidden;
+    max-height: 200px;
+}
+

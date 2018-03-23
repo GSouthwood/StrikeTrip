@@ -28,8 +28,8 @@ namespace StrikeTrip.Controllers
                     trips.Add(trip);
                 }
             }
-            ViewBag.Latitude = trips[0].Latitude;
-            ViewBag.Longitude = trips[0].Longitude‎;
+            ViewBag.Latitude = trips[0].FixLatLong(trips[0].LocationName, trips[0].Latitude);
+            ViewBag.Longitude = trips[0].Longitude;
 
             return View("Index", trips);
         }
@@ -44,9 +44,9 @@ namespace StrikeTrip.Controllers
 
                 trips.Add(trip);
             }
-            ViewBag.Latitude = trips[0].Latitude;
-            ViewBag.Longitude = trips[0].Longitude‎;
-            
+            ViewBag.Latitude = trips[0].FixLatLong(trips[0].LocationName, trips[0].Latitude);
+            ViewBag.Longitude = trips[0].Longitude;
+
 
             return View("Trips", trips);
         }

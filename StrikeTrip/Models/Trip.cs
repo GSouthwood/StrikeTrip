@@ -5,6 +5,7 @@ using System.Web;
 using System.ComponentModel.DataAnnotations;
 using StrikeTrip.UtilityMethods;
 using StrikeTrip.DAL;
+using System.Text.RegularExpressions;
 
 namespace StrikeTrip.Models
 {
@@ -32,6 +33,30 @@ namespace StrikeTrip.Models
         public Trip()
         {
 
+        }
+
+
+
+        public string FixLatLong(string name, string latitude)
+        {
+            //if (!Regex.IsMatch(latOrLong, "^(\\-?\\d+(\\.\\d+)?).\\s*(\\-?\\d+(\\.\\d +)?)$"))
+            //{
+            //    latOrLong = Regex.Replace(latOrLong, "^(\\-?\\d+(\\.\\d+)?).\\s*(\\-?\\d+(\\.\\d +)?)$", "");
+            //}
+            
+            if (name == "Nicaragua")
+            {
+                latitude = "12.136388";
+            }
+            else if (name == "Japan")
+            {
+                latitude = "35.7719";
+            }
+            else if (name == "Maldives")
+            {
+                latitude = "-0.661";
+            }
+            return latitude;
         }
 
         public Trip(string inputPrice, string inputDepartureDate, string inputReturnDate, string inputHeight)
@@ -122,13 +147,13 @@ namespace StrikeTrip.Models
             }
             return DateTime.Parse(returnDate);
         }
-        public string BestOption(string name)
+        public string BestOption(string name, decimal price)
         {
             if (name == null)
             {
                 return "Stay home";
             }
-            return name;
+            return name + " " + "$" + price;
         }
 
 

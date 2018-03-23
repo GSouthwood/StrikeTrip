@@ -9,14 +9,12 @@
 }
 
 
-
-
 <script type="text/javascript">
 
     var center = new google.maps.LatLng(@ViewBag.Latitude, @ViewBag.Longitude);
     $(document).ready(function () {
         map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 4,
+            zoom: 5,
             center: center,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
@@ -24,7 +22,7 @@
         var flightPlanCoordinates = [
 
             { lat: 34.0522, lng: -118.243 },
-            { lat: @Decimal.Parse(ViewBag.Latitude), lng: @Decimal.Parse(ViewBag.Longitude)}
+            { lat: @ViewBag.Latitude, lng: @ViewBag.Longitude }
 
 
 
@@ -83,7 +81,7 @@
         </div>
         <div class="col-md-2"></div>
         <div class="col-md-7 text-center">
-            <h3>Best option: @Model[0].BestOption(Model[0].LocationName)</h3>
+            <h3 class="selection">Best option: @Model[0].BestOption(Model[0].LocationName, Model[0].Price)</h3>
 
         </div>
     </div>
@@ -130,66 +128,93 @@
 }
 
 <div class="separate"></div>
+<div class="scrollit">
+    <table class="table">
+        <tr>
+            <th>
+                Location
+            </th>
+            <th>
+                Spot
+            </th>
+            <th>
+                Departure Date
+            </th>
+            <th>
+                Return Date
+            </th>
+            <th>
+                Max Surf Height During Trip
+            </th>
+            <th>
+                Number of Days with Good Surf
+            </th>
+            <th>
+                Flight Price
+            </th>
+        </tr>
 
-<table class="table">
-    <tr>
-        <th>
-            Location
-        </th>
-        <th>
-            Spot
-        </th>
-        <th>
-            Departure Date
-        </th>
-        <th>
-            Return Date
-        </th>
-        <th>
-            Max Surf Height During Trip
-        </th>
-        <th>
-            Number of Days with Good Surf
-        </th>
-        <th>
-            Flight Price
-        </th>
-    </tr>
-    
-    @if (Model.Count >= 1 && Model[0].LocationName != null)
-    {
-        foreach (var item in Model)
+        @if (Model.Count >= 1 && Model[0].LocationName != null)
         {
-            <tr>
+            <tr id="0" class="highlight" data-name="@Model[0].LocationName $@Model[0].Price" data-lat="@Model[0].FixLatLong(Model[0].LocationName, Model[0].Latitude)" data-long="@Model[0].Longitude">
                 <td>
-                    @Html.DisplayFor(modelItem => item.LocationName)
+                    @Model[0].LocationName
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.SpotName)
+                    @Model[0].SpotName
                 </td>
                 <td>
-                    @item.DepartureDate.ToShortDateString()
+                    @Model[0].DepartureDate.ToShortDateString()
                 </td>
                 <td>
-                    @item.ReturnDate.ToShortDateString()
+                    @Model[0].ReturnDate.ToShortDateString()
                 </td>
                 <td>
-                    @Math.Truncate(item.MaxSurfHeight)ft
+                    @Math.Truncate(Model[0].MaxSurfHeight)ft
                 </td>
                 <td>
-                    @item.SurfDays()
+                    @Model[0].SurfDays()
                 </td>
                 <td>
-                    $@Math.Truncate(item.Price)
+                    $@Math.Truncate(Model[0].Price)
                 </td>
                 <td>
-                    @Html.ActionLink("Forecast", "Forecast", new { id = item.SpotName }, new { @class = "details_button" })
+                    @Html.ActionLink("Forecast", "Forecast", new { id = Model[0].SpotName }, new { @class = "details_button" })
                 </td>
             </tr>
+            for (int i = 1; i < Model.Count; i++)
+            {
+                <tr id="@i" data-name="@Model[i].LocationName $@Model[i].Price" data-lat="@Model[i].FixLatLong(Model[i].LocationName, Model[i].Latitude)" data-long="@Model[i].Longitude">
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].LocationName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => Model[i].SpotName)
+                    </td>
+                    <td>
+                        @Model[i].DepartureDate.ToShortDateString()
+                    </td>
+                    <td>
+                        @Model[i].ReturnDate.ToShortDateString()
+                    </td>
+                    <td>
+                        @Math.Truncate(Model[i].MaxSurfHeight)ft
+                    </td>
+                    <td>
+                        @Model[i].SurfDays()
+                    </td>
+                    <td>
+                        $@Math.Truncate(Model[i].Price)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Forecast", "Forecast", new { id = Model[i].SpotName }, new { @class = "details_button" })
+                    </td>
+                </tr>
+            }
         }
-    }
 
-</table>
+    </table>
+</div>
 @if (Model.Count == 1 && Model[0].LocationName == null)
 {
 
@@ -197,6 +222,6 @@
 }
 
 <div id="map_wrap" style="position: absolute; top: 150px; bottom: 300px; left: 430px; right: 130px;">
-    <div id="map" style="width: 100%; height: 100%;">
+    <div id="map" style="width: 100%; height: 200px;">
     </div>
 </div>
