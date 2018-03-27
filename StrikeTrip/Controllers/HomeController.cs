@@ -9,12 +9,23 @@ using StrikeTrip.UtilityMethods;
 
 namespace StrikeTrip.Controllers
 {
+
     public class HomeController : Controller
     {
-        private string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Scraper;Integrated Security=True";
+
+        private List<string> connection;
+        private string connectionString;
+        
+
+        //private string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=Scraper;Integrated Security=True";
+        
+
 
         public ActionResult Index()
         {
+            connection = UtilityMethods.Environment.GetConnectionString();
+            connectionString = connection[0];
+            ViewBag.ServerMessage = connection[1];
             TripSqlDal tripSqlDal = new TripSqlDal(connectionString);
             List<Trip> trips = tripSqlDal.TripsFromInput("500", "", "", "5");
 
@@ -35,6 +46,9 @@ namespace StrikeTrip.Controllers
         }
         public ActionResult Trips(string inputPrice, string inputDepartureDate, string inputReturnDate, string inputHeight)
         {
+            connection = UtilityMethods.Environment.GetConnectionString();
+            connectionString = connection[0];
+            ViewBag.ServerMessage = connection[1];
             TripSqlDal tripSqlDal = new TripSqlDal(connectionString);
             List<Trip> trips = tripSqlDal.TripsFromInput(inputPrice, inputDepartureDate, inputReturnDate, inputHeight);
             
@@ -52,6 +66,9 @@ namespace StrikeTrip.Controllers
         }
         public ActionResult Forecast(string id)
         {
+            connection = UtilityMethods.Environment.GetConnectionString();
+            connectionString = connection[0];
+            ViewBag.ServerMessage = connection[1];
             ForecastDaySqlDal forecastDaySql = new ForecastDaySqlDal(connectionString);
             List<ForecastDay> forecast = forecastDaySql.GetDetailedForecast(id);
 
