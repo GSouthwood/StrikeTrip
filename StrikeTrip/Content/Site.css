@@ -101,3 +101,13 @@ tr.highlight {
     max-height: 200px;
 }
 
+#temp {
+    background-color: white;
+    padding: 5px;
+    border-radius: 5px;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
+    text-align: center;
+}
+

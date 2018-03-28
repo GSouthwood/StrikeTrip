@@ -75,6 +75,14 @@ namespace StrikeTrip.Controllers
             return View("Forecast", forecast);
         }
 
+        public ActionResult ForecastFrame(string id)
+        {
+            
+            ViewBag.Spot = id.Substring(0, id.LastIndexOf("-"));
+            ViewBag.Id = id.Substring(id.LastIndexOf("-")+1);
+            return View("ForecastFrame");
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

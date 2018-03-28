@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "ForecastFrame";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    string url = "https://magicseaweed.com/" + ViewBag.Spot + "/" + ViewBag.Id + "/Embed/";
+}
+
+@*<iframe src="@url" style="margin-top: 100px; width: 90%; height: 250px" scrolling="no" frameborder="1"></iframe>
+<div style="position: relative; margin-top: 100px"></div>*@
+
+<iframe src="@url" style="width: 90%; height: 4500px; display: inline-block; position: absolute; top: -700px;" scrolling="no" frameborder="1"></iframe>
+
+

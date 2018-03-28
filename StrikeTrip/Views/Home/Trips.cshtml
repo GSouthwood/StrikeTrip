@@ -134,6 +134,7 @@
     }
 }
 
+<p id="temp">Click inside the table and scroll with arrow keys or click on a trip to see the location on the map</p>
 <div class="separate"></div>
 <div class="scrollit">
     <table class="table">
@@ -188,6 +189,9 @@
                 <td>
                     @Html.ActionLink("Forecast", "Forecast", new { id = Model[0].SpotName }, new { @class = "details_button" })
                 </td>
+                <td>
+                    @Html.ActionLink("MSW", "ForecastFrame", new { id = Model[0].NameSpotId() }, new { @class = "details_button" })
+                </td>
             </tr>
             for (int i = 1; i < Model.Count; i++)
             {
@@ -215,6 +219,9 @@
                     </td>
                     <td>
                         @Html.ActionLink("Forecast", "Forecast", new { id = Model[i].SpotName }, new { @class = "details_button" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("MSW", "ForecastFrame", new { id = Model[i].NameSpotId() }, new { @class = "details_button" })
                     </td>
                 </tr>
             }

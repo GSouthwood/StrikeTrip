@@ -99,6 +99,7 @@ $(document).keydown(function (e) {
 
             $(document).ready(function () {
 
+
                 var center = new google.maps.LatLng(lat, long);
                 map = new google.maps.Map(document.getElementById("map"), {
                     zoom: 5,
@@ -177,6 +178,18 @@ $(document).keydown(function (e) {
     }
 
 
+
+
+});
+
+$(document).ready(function () {
+    
+
+    var fade_out = function () {
+        $("#temp").fadeOut().empty();
+    }
+
+    setTimeout(fade_out, 7000);
 
 
 });

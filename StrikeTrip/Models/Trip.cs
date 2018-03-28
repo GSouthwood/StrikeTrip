@@ -29,13 +29,19 @@ namespace StrikeTrip.Models
         [DataType(DataType.Date)]
         public DateTime InputReturnDate { get; set; }
         public List<ForecastDay> Forecast { get; set; }
+        public int SpotId { get; set; }
 
         public Trip()
         {
 
         }
 
-
+        public string NameSpotId()
+        {
+            string result = "";
+            result = SpotName + "-Surf-Report" + "-" + SpotId.ToString();
+            return result;
+        }
 
         public string FixLatLong(string name, string latitude)
         {

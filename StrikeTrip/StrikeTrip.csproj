@@ -199,6 +199,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Home\Trips.cshtml" />
     <Content Include="Views\Home\Forecast.cshtml" />
+    <Content Include="Views\Home\ForecastFrame.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
