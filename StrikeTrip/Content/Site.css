@@ -1,7 +1,7 @@
 ﻿body {
-    padding-top: 50px;
+    padding-top: 30px;
     padding-bottom: 20px;
-    background-color: lightgray;
+    background-color: white;
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 h1, h2, h3, h4 {
@@ -9,8 +9,7 @@ h1, h2, h3, h4 {
 }
 /* Set padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    width: 100%;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -35,6 +34,24 @@ textarea {
     background-color: #222222;
     
 }
+.title {
+    color: white;
+    font-size: xx-large;
+}
+.inputs {
+    color: white;
+    font-size: large;
+}
+.textbox {
+    padding: 9px;
+    border-radius: 3px;
+    border-style: none;
+    background-color: #609a60;
+    color: white;
+}
+::-webkit-input-placeholder {
+    color: #abe4ab;
+}
 .parameters {
     padding: 10px;
     padding-top: 20px;
@@ -46,6 +63,8 @@ textarea {
     color: red;
     opacity: .7;
     text-align: center;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 .no_flights_params {
     color: red;
@@ -64,8 +83,13 @@ textarea {
     
 }
 button {
-    background: #222222;
+    background: #3d6636;
     color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-radius: 3px;
 }
     button:hover {
         background: #343232;
@@ -110,4 +134,11 @@ tr.highlight {
     margin-right: 15%;
     text-align: center;
 }
+
+#standards {
+    background-color: #8cc78c;
+    padding: 75px;
+    padding-top: 45px;
+}
+
 

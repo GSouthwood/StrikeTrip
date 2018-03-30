@@ -38,54 +38,69 @@
     flightPath.setMap(map);
     });
 
-    
+
 
 </script>
 
 
 
+
+
+
+
+<div id="standards">
+    <br />
+    <div class="title">Pick Your Standards</div>
+    @using (Html.BeginForm("Trips", "Home", FormMethod.Get))
+    {
+
+        <div class="container-fluid inputs">
+            <div class="row">
+
+                <br />
+                <br />
+                <div class="col-sm-3">
+                    @*@Html.Label("InputMaxPrice", "Max price")<br />*@
+                    @Html.TextBox("inputPrice", "", new { @class = "textbox", placeholder = "Max price" })
+                </div>
+
+                <div class="col-sm-3">
+                    @*@Html.Label("InputMinSurfHeight", "Min surf height")<br />*@
+                    @Html.TextBox("inputHeight", "", new { @class = "textbox", placeholder = "Min surf" })
+
+                </div>
+                <div class="col-sm-3">
+                    @*@Html.Label("InputDepartureDate", "Departure date")<br />*@
+                    @Html.TextBox("inputDepartureDate", "", new { @class = "textbox", placeholder = "Departure date" })
+                </div>
+                <div class="col-sm-3">
+                    @*@Html.Label("InputeReturnDate", "Return date")<br />*@
+                    @Html.TextBox("inputReturnDate", "", new { @class = "textbox", placeholder = "Return date" })
+                </div>
+                <br />
+            </div>
+            <br />
+
+            <div class="col-sm-1">
+
+                <button style="border-style: none">Search</button>
+            </div>
+
+
+        </div>
+
+    }
+</div>
+
+
 <div class="container-fluid form_map">
     <div class="row">
-        <div class="col-md-4">
-
-
-
-            <h2>Pick Your Standards</h2>
-            @using (Html.BeginForm("Trips", "Home", FormMethod.Get))
-            {
-
-                <div style="padding-left: 45px">
-                    @Html.Label("InputMaxPrice", "Max price")<br />
-                    @Html.TextBox("inputPrice", "500")
-
-                </div>
-                <div style="padding-left: 45px">
-                    @Html.Label("InputMinSurfHeight", "Min surf height")<br />
-                    @Html.TextBox("inputHeight", "5")
-
-                </div>
-                <div style="padding-left: 45px">
-                    @Html.Label("InputDepartureDate", "Departure date")<br />
-                    @Html.TextBox("inputDepartureDate")
-                </div>
-                <div style="padding-left: 45px">
-                    @Html.Label("InputeReturnDate", "Return date")<br />
-                    @Html.TextBox("inputReturnDate")
-                </div>
-                <div style="padding-left: 45px">
-                    <br />
-                    <button style="box-shadow: none;">Submit</button>
-                </div>
-
-
-            }
-
-        </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-7 text-center">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 text-center">
             <h3 class="selection">Best option: @Model[0].BestOption(Model[0].LocationName, Model[0].Price)</h3>
-
+            <div id="map" style="width: 100%; height: 200px;"></div>
         </div>
+        <div class="col-md-3"></div>
     </div>
 </div>
 
@@ -184,9 +199,9 @@
                 <td>
                     @Html.ActionLink("Forecast", "Forecast", new { id = Model[0].SpotName }, new { @class = "details_button" })
                 </td>
-                @*<td>
+                <td>
                     @Html.ActionLink("MSW", "ForecastFrame", new { id = Model[0].NameSpotId() }, new { @class = "details_button" })
-                </td>*@
+                </td>
             </tr>
             for (int i = 1; i < Model.Count; i++)
             {
@@ -215,9 +230,9 @@
                     <td>
                         @Html.ActionLink("Forecast", "Forecast", new { id = Model[i].SpotName }, new { @class = "details_button" })
                     </td>
-                    @*<td>
+                    <td>
                         @Html.ActionLink("MSW", "ForecastFrame", new { id = Model[i].NameSpotId() }, new { @class = "details_button" })
-                    </td>*@
+                    </td>
                 </tr>
             }
         }
@@ -229,8 +244,3 @@
 
     <div class="no_flights_table">No trips are available with the selected characteristics.</div>
 }
-
-<div id="map_wrap" style="position: absolute; top: 150px; bottom: 300px; left: 430px; right: 130px;">
-    <div id="map" style="width: 100%; height: 200px;">
-    </div>
-</div>

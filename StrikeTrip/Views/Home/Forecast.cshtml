@@ -6,6 +6,9 @@
     ViewBag.Title = "Forecast";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@{
+    string forecastCheck = "";
+}
 
 <h2>7 Day Forecast &#10097 @Model[0].SpotName, @Model[0].LocationName</h2>
 
@@ -22,15 +25,22 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @item.ForecastForDate.DayOfWeek - @item.ForecastForDate.Month/@item.ForecastForDate.Day
-        </td>
-        <td>
-            @item.AverageSurfHeight ft
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        if (!forecastCheck.Contains(item.ForecastForDate.DayOfWeek.ToString()))
+        {
+
+
+            <tr>
+                <td>
+                    @item.ForecastForDate.DayOfWeek - @item.ForecastForDate.Month/@item.ForecastForDate.Day
+                </td>
+                <td>
+                    @item.AverageSurfHeight ft
+                </td>
+            </tr>
+        }
+        forecastCheck += item.ForecastForDate.DayOfWeek.ToString();
+    }
 
 </table>
