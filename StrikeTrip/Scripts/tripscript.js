@@ -191,8 +191,94 @@ $(document).ready(function () {
 
     setTimeout(fade_out, 7000);
 
+ 
+    $(".dropdownTag").hide();
+    $(".pullupMap").hide();
+
+    var top = $("div#standards");
+    $(".pullup").on("click", function () {
+        top.hide("slow");
+        $(".pullup").hide();
+        $(".dropdownTag").show();
+        $(".dropdownTag").css("top", "11px");
+        $(".dropdownTag").css("height", "30px");
+        $(".dropdownTagMap").css("margin-top", "20px");
+        $(".pullupMap").css("margin-top", "20px");
+
+
+    });
+
+    $(".dropdownTag").on("click", function () {
+        if ($(map).is(":visible"))
+        {
+
+        top.show("slow");
+        $(".pullup").show();
+        $(".dropdownTag").hide();
+        $(".dropdownTagMap").css("margin-top", "0px");
+        $(".dropdownTagMap").css("margin-top", "15px");
+        }
+        else {
+            top.show("slow");
+            $(".pullup").show();
+            $(".dropdownTag").hide();
+            $(".dropdownTagMap").css("margin-top", "0px");
+            $(".dropdownTagMap").css("margin-top", "15px");
+            $(".pullupMap").css("margin-top", "9px");
+        }
+        
+
+    });
+    
+    var map = $("div.form_map");
+    $(".dropdownTagMap").on("click", function () {
+        if ($("#standards").is(":visible")) {
+            map.hide("slow");
+            $(".pullupMap").css("margin", "-1px");
+            $(".pullupMap").css("margin-right", "0px");
+            $(".pullupMap").css("margin-left", "-2px");
+            $(".pullupMap").css("margin-top", "9px");
+            $("#standards").css("width", "100%");
+            $(".pullupMap").show();
+            $(".dropdownTagMap").hide();
+        }
+        else {
+            map.hide("slow");
+            $(".pullupMap").css("margin", "-1px");
+            $(".pullupMap").css("margin-right", "0px");
+            $(".pullupMap").css("margin-left", "-2px");
+            $(".pullupMap").css("margin-top", "17px");
+            $("#standards").css("width", "100%");
+            $(".pullupMap").show();
+            $(".dropdownTagMap").hide();
+        }
+
+    });
+    
+    $(".pullupMap").on("click", function () {
+        
+
+
+            map.show("slow");
+            $("#standards").css("width", "45vw");
+            $(".pullupMap").css("margin-top", "20px");
+
+            $(".pullupMap").hide();
+            $(".dropdownTagMap").show();
+
+
+    });
+
+
+
+    
+        
+    
 
 });
+
+
+
 
 
 

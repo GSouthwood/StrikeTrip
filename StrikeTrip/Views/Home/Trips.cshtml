@@ -15,89 +15,87 @@
 
 <script type="text/javascript">
 
-
     var center = new google.maps.LatLng(@lat, @longitude);
-    $(document).ready(function () {
-        map = new google.maps.Map(document.getElementById("map"), {
-            zoom: 5,
-            center: center,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
+$(document).ready(function () {
+    map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 5,
+        center: center,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
 
-        var flightPlanCoordinates = [
+    var flightPlanCoordinates = [
 
-            { lat: 34.0522, lng: -118.243 },
-            { lat: @lat, lng: @longitude }
+        { lat: 34.0522, lng: -118.243 },
+        { lat: @lat, lng: @longitude }
 
 
 
         ];
-    var flightPath = new google.maps.Polyline({
-        path: flightPlanCoordinates,
-        geodesic: true,
-        strokeColor: '#FF0000',
-        strokeOpacity: 1.0,
-        strokeWeight: 1
-    });
+var flightPath = new google.maps.Polyline({
+    path: flightPlanCoordinates,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 1
+});
 
-    flightPath.setMap(map);
-    });
+flightPath.setMap(map);
+
+});
+
 
 </script>
 
 
+<div class="standards_and_map">
+    <div id="standards">
+        <div class="title">Pick Your Standards</div>
+        @using (Html.BeginForm("Trips", "Home", FormMethod.Get, new { @id = "form_inputs" }))
+        {
 
-<div class="container-fluid form_map">
-    <div class="row">
-        <div class="col-md-4">
+            <div class="container-fluid inputs">
+                <br />
+                <div class="input-block">
+                    <div class="input1">
+                        <div>Your desired...</div>
+                        @Html.TextBox("inputHeight", "", new { @class = "textbox input2", placeholder = "Wave height" })
+                    </div>
 
+                    <div class="input2">
 
+                        @Html.TextBox("inputPrice", "", new { @class = "textbox input1", placeholder = "Flight price" })
 
-            <h2>Pick Your Standards</h2>
-            @using (Html.BeginForm("Trips", "Home", FormMethod.Get))
-            {
-
-                <div style="padding-left: 45px">
-                    @Html.Label("InputMaxPrice", "Max price")<br />
-                    @Html.TextBox("inputPrice", "500")
-
+                    </div>
                 </div>
-                <div style="padding-left: 45px">
-                    @Html.Label("InputMinSurfHeight", "Min surf height")<br />
-                    @Html.TextBox("inputHeight", "5")
+                <div class="input-block">
+                    <div class="input3">
 
-                </div>
-                <div style="padding-left: 45px">
-                    @Html.Label("InputDepartureDate", "Departure date")<br />
-                    @Html.TextBox("inputDepartureDate")
-                </div>
-                <div style="padding-left: 45px">
-                    @Html.Label("InputeReturnDate", "Return date")<br />
-                    @Html.TextBox("inputReturnDate")
-                </div>
-                <div style="padding-left: 45px">
-                    <br />
-                    <button style="box-shadow: none;">Submit</button>
+                        @Html.TextBox("inputDepartureDate", "", new { @class = "textbox input3", placeholder = "Departure date" })
+                    </div>
+                    <div class="input4">
+
+                        @Html.TextBox("inputReturnDate", "", new { @class = "textbox input4", placeholder = "Return date" })
+                    </div>
                 </div>
 
-
-            }
-
-        </div>
-        <div class="col-md-2"></div>
-        <div class="col-md-7 text-center">
-            <h3 class="selection">Best option: @Model[0].BestOption(Model[0].LocationName, Model[0].Price)</h3>
-            <div id="map" style="width: 100%; height: 200px;">
             </div>
-        </div>
+            <button style="border-style: none"><i class="fas fa-search"></i></button>
+        }
+    </div>
+    <i class="pullup fas fa-angle-double-up"></i>
+    <i class="dropdownTag fas fa-search"></i>
+    <div class="form_map">      
+        <h3 class="selection">Best option: @Model[0].BestOption(Model[0].LocationName, Model[0].Price)</h3>
+        <div id="map"></div>
     </div>
 </div>
-
+<i class="pullupMap far fa-map"></i>
+<i class="dropdownTagMap fas fa-angle-double-down"></i>
 
 @{
     if (Model.Count == 1 && Model[0].LocationName == null)
     {
-        <div class="container-fluid parameters">
+        <div class="container parameters">
             <div class="row">
                 <div class="col-sm-4"></div>
                 <div class="col-xs-6 col-sm-2">Price: <strong class="no_flights_params">@Model[0].PriceString(Model[0].InputMaxPrice)</strong></div>
@@ -115,7 +113,7 @@
     else
     {
 
-        <div class="container-fluid parameters">
+        <div class="container parameters">
             <div class="row">
                 <div class="col-sm-4"></div>
                 <div class="col-xs-6 col-sm-2">Price: <strong>@Model[0].PriceString(Model[0].InputMaxPrice)</strong></div>
@@ -133,6 +131,78 @@
 
     }
 }
+
+@if (Model.Count >= 1 && Model[0].LocationName != null)
+{
+    <ul style="width: 100%">
+        @foreach (var item in Model)
+        {
+            string imgName = "/Content/" + item.SpotName + ".jpg";
+            <li class="trips">
+                <img src="@imgName" class="spot" alt="@item.LocationName" />
+
+                <div class="trip_info container-fluid">
+                    <div class="row">
+                        <div class="col-md-12" style="height: 5px"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-8">
+
+                            <i class="fas fa-map-marker-alt fa-2x"></i> @item.SpotName, @item.LocationName
+                        </div>
+                        <div class="col-sm-1"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="height: 5px"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5">
+                            <img src="~/Content/wave.png" class="wave" atl="wave-pic" /><br /> <span style="font-size: large">@Math.Truncate(item.MaxSurfHeight)ft</span>
+                        </div>
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-5">
+                            <i class="fas fa-plane fa-2x"></i><br /><span style="font-size: large">$@Math.Truncate(item.Price)</span>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="height: 5px"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-1"></div>
+                        <div class="col-sm-10">
+                            <i class="fas fa-calendar-alt fa-2x"></i> @item.DepartureDate.ToShortDateString() - @item.ReturnDate.ToShortDateString()
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12" style="height: 5px"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-2"></div>
+                        @Html.ActionLink("Forecast", "Forecast", new { id = item.SpotName }, new { @class = "details_button forecast" })
+
+                        @Html.ActionLink("MSW", "ForecastFrame", new { id = item.NameSpotId() }, new { @class = "details_button" })
+
+
+                        <a href="" class="details_button sky">SkyScanner</a>
+
+                    </div>
+                </div>
+            </li>
+        }
+
+    </ul>
+
+}
+
+
+
+
+
+
+
 
 <p id="temp">Click inside the table and scroll with arrow keys or click on a trip to see the location on the map</p>
 <div class="separate"></div>
@@ -195,7 +265,7 @@
             </tr>
             for (int i = 1; i < Model.Count; i++)
             {
-                <tr id="@i" data-name="@Model[i].LocationName $@Model[i].Price"  data-lat="@Model[i].FixLatLong(Model[i].LocationName, Model[i].Latitude)" data-long="@Model[i].Longitude">
+                <tr id="@i" data-name="@Model[i].LocationName $@Model[i].Price" data-lat="@Model[i].FixLatLong(Model[i].LocationName, Model[i].Latitude)" data-long="@Model[i].Longitude">
                     <td>
                         @Html.DisplayFor(modelItem => Model[i].LocationName)
                     </td>

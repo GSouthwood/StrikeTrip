@@ -2,8 +2,9 @@
     padding-top: 30px;
     padding-bottom: 20px;
     background-color: white;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
+
 h1, h2, h3, h4 {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
@@ -18,30 +19,30 @@ h1, h2, h3, h4 {
 .dl-horizontal dt {
     white-space: normal;
 }
+
 th {
     border-bottom: 1px solid black;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
-}
+/* Search parameters styling*/
+
 .separate {
     width: 100%;
     height: 5px;
     background-color: #222222;
-    
 }
+
 .title {
     color: white;
     font-size: xx-large;
+    margin-left: 15%;
 }
+
 .inputs {
     color: white;
-    font-size: large;
+    font-size: medium;
 }
+
 .textbox {
     padding: 9px;
     border-radius: 3px;
@@ -49,13 +50,207 @@ textarea {
     background-color: #609a60;
     color: white;
 }
+
 ::-webkit-input-placeholder {
     color: #abe4ab;
 }
+
+/* changing the screen size medium*/
+
+.input1, .input2 {
+    display: inline-block;
+    min-width: 150px;
+    max-width: 150px;
+    margin: 1px;
+}
+
+.input3, .input4 {
+    display: inline-block;
+    min-width: 150px;
+    max-width: 150px;
+    margin: 1px;
+}
+
+
 .parameters {
     padding: 10px;
     padding-top: 20px;
 }
+
+button {
+    background: #3d6636;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-radius: 3px;
+    margin: 1px;
+    padding: 9px;
+    width: 60px;
+}
+
+    button:hover {
+        background: #343232;
+        color: #d3d3d3;
+    }
+
+.standards_and_map {
+    position: relative;
+    top: 10px;
+}
+
+#standards {
+    background-color: #8cc78c;
+    padding: 75px;
+    padding-left: 35px;
+    padding-top: 45px;
+    padding-bottom: 30px;
+    width: 45vw;
+    min-width: 300px;
+    display: inline-block;
+    min-height: 100%;
+    max-height: 450px;
+    
+}
+
+.form_map {
+    width: 45vw;
+    min-width: 100px;
+    display: inline-block;
+    max-height: 300px;
+}
+
+.pullup {
+    background-color: #8cc78c;
+    padding: 7px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    left: 0;
+    bottom: -28px;
+}
+
+    .pullup:hover {
+        color: grey;
+    }
+
+.dropdownTag {
+    background-color: #8cc78c;
+    padding: 7px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-decoration: none;
+    color: white;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+    .dropdownTag:hover {
+        color: grey;
+    }
+
+.pullupMap {
+    background-color: white;
+    border: solid;
+    border-color: #8cc78c;
+    margin: -2px;
+    padding: 17px;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    text-decoration: none;
+    color: #8cc78c;
+    display: inline;
+    float: right;
+}
+
+    .pullupMap:hover {
+        color: grey;
+    }
+
+.dropdownTagMap {
+    background-color: white;
+    border: solid;
+    border-color: #8cc78c;
+    margin-top: 0px;
+    padding: 7px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-decoration: none;
+    color: #8cc78c;
+    display: inline;
+    float: right;
+}
+
+    .dropdownTagMap:hover {
+        color: grey;
+    }
+
+#form_inputs {
+    margin-left: 15%;
+    width: 100%;
+}
+
+.toggles {
+    position: absolute;
+    position: fixed;
+}
+
+
+.toggledUp {
+    margin-top: 25px;
+}
+/* List styling */
+
+li.trips {
+    min-width: 240px;
+    max-width: 240px;
+    margin-right: 25px;
+    margin-left: 5px;
+    margin-top: 20px;
+    max-height: 400px;
+    display: inline-block;
+    border: solid;
+    border-color: black;
+    border-width: 2px;
+    padding-bottom: 20px;
+}
+
+@media only screen and (max-width: 765px) {
+    .forecast {
+        margin-left: 40px;
+    }
+}
+
+img.wave {
+    max-width: 35px;
+    max-height: 35px;
+}
+
+.fa-plane, .fa-map-marker-alt, .fa-calendar-alt {
+    color: grey;
+}
+
+img.spot {
+    width: 236px;
+    height: 170px;
+    display: inline;
+}
+
+.trip_info {
+    display: inline;
+    width: 230px;
+    height: 230px;
+}
+
+a.sky {
+    margin: 0px;
+}
+
+/* table styling*/
 .no_flights_table {
     width: 100%;
     padding-top: 50px;
@@ -66,35 +261,26 @@ textarea {
     padding-left: 15px;
     padding-right: 15px;
 }
+
 .no_flights_params {
     color: red;
     opacity: .7;
     padding: 10px;
 }
-.form_map {
-    padding-bottom: 20px;
-    padding-top: 30px;
-    width: 100%;
-    
 
-}
+
+
 #map {
-    height: 100%;
-    
+    height: 150px;
+    width: 100%;
+    min-width: 200px;
+    margin-left: 60px;
+    padding-top: 20px;
 }
-button {
-    background: #3d6636;
-    color: white;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-bottom: 5px;
-    padding-top: 5px;
-    border-radius: 3px;
+.selection {
+    margin-left: 80px;   
+    min-width: 100px;
 }
-    button:hover {
-        background: #343232;
-        color: #d3d3d3;
-    }
 .details_button {
     background-color: #222222;
     color: white;
@@ -102,23 +288,24 @@ button {
     border-radius: 1px;
     font-size: small;
 }
-.details_button:hover {
-    text-decoration: none;
-    color: #d3d3d3;
-}
+
+    .details_button:hover {
+        text-decoration: none;
+        color: #d3d3d3;
+    }
+
 .about_para {
-    margin: 50px 600px 100px 50px; 
+    margin: 50px 600px 100px 50px;
 }
+
 tr.highlight {
     border: solid;
     border-color: #52b544;
     border-right-style: groove;
     padding: 2em;
-    
     color: green;
-
-    
 }
+
 .scrollit {
     overflow: scroll;
     overflow-x: hidden;
@@ -134,11 +321,3 @@ tr.highlight {
     margin-right: 15%;
     text-align: center;
 }
-
-#standards {
-    background-color: #8cc78c;
-    padding: 75px;
-    padding-top: 45px;
-}
-
-

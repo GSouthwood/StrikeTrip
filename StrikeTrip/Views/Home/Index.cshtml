@@ -51,47 +51,45 @@
 <div id="standards">
     <br />
     <div class="title">Pick Your Standards</div>
-    @using (Html.BeginForm("Trips", "Home", FormMethod.Get))
+    @using (Html.BeginForm("Trips", "Home", FormMethod.Get, new { @id = "form_inputs" }))
     {
 
         <div class="container-fluid inputs">
-            <div class="row">
-
-                <br />
-                <br />
-                <div class="col-sm-3">
-                    @*@Html.Label("InputMaxPrice", "Max price")<br />*@
-                    @Html.TextBox("inputPrice", "", new { @class = "textbox", placeholder = "Max price" })
-                </div>
-
-                <div class="col-sm-3">
-                    @*@Html.Label("InputMinSurfHeight", "Min surf height")<br />*@
-                    @Html.TextBox("inputHeight", "", new { @class = "textbox", placeholder = "Min surf" })
-
-                </div>
-                <div class="col-sm-3">
-                    @*@Html.Label("InputDepartureDate", "Departure date")<br />*@
-                    @Html.TextBox("inputDepartureDate", "", new { @class = "textbox", placeholder = "Departure date" })
-                </div>
-                <div class="col-sm-3">
-                    @*@Html.Label("InputeReturnDate", "Return date")<br />*@
-                    @Html.TextBox("inputReturnDate", "", new { @class = "textbox", placeholder = "Return date" })
-                </div>
-                <br />
-            </div>
             <br />
+            <br />
+            <div class="input-block">
+                <div class="input1">
+                    <div>Your desired...</div>
+                    @Html.TextBox("inputHeight", "", new { @class = "textbox input2", placeholder = "Wave height" })
+                </div>
 
-            <div class="col-sm-1">
+                <div class="input2">
 
-                <button style="border-style: none">Search</button>
+                    @Html.TextBox("inputPrice", "", new { @class = "textbox input1", placeholder = "Flight price" })
+
+                </div>
             </div>
+            <div class="input-block">
+                <div class="input3">
 
+                    @Html.TextBox("inputDepartureDate", "", new { @class = "textbox input3", placeholder = "Departure date" })
+                </div>
+                <div class="input4">
+
+                    @Html.TextBox("inputReturnDate", "", new { @class = "textbox input4", placeholder = "Return date" })
+                </div>
+            </div>
 
         </div>
-
+        <button style="border-style: none"><i class="fas fa-search"></i></button>
     }
 </div>
 
+<i class="pullup fas fa-angle-double-up"></i>
+<i class="dropdownTag fas fa-angle-double-down"></i>
+
+<i class="pullupMap fas fa-angle-double-up"></i>
+<i class="dropdownTagMap fas fa-angle-double-down"></i>
 
 <div class="container-fluid form_map">
     <div class="row">
