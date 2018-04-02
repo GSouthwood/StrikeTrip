@@ -10,37 +10,54 @@
     string forecastCheck = "";
 }
 
-<h2>7 Day Forecast &#10097 @Model[0].SpotName, @Model[0].LocationName</h2>
 
-<div class="separate"></div>
 
-<table class="table">
-    <tr>
-        <th>
-            Forecast Date
-        </th>
-        <th>
-            Average Surf Height
-        </th>
-        <th></th>
-    </tr>
+<h2>@Model[0].SpotName &#10097 @Model[0].LocationName</h2>
 
-    @foreach (var item in Model)
-    {
-        if (!forecastCheck.Contains(item.ForecastForDate.DayOfWeek.ToString()))
+UNDER CONSTRUCTION
+
+
+
+
+
+
+
+
+
+
+
+
+    @*<h2>7 Day Forecast &#10097 @Model[0].SpotName, @Model[0].LocationName</h2>
+
+    <div class="separate"></div>
+
+    <table class="table">
+        <tr>
+            <th>
+                Forecast Date
+            </th>
+            <th>
+                Average Surf Height
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
         {
+            if (!forecastCheck.Contains(item.ForecastForDate.DayOfWeek.ToString()))
+            {
 
 
-            <tr>
-                <td>
-                    @item.ForecastForDate.DayOfWeek - @item.ForecastForDate.Month/@item.ForecastForDate.Day
-                </td>
-                <td>
-                    @item.AverageSurfHeight ft
-                </td>
-            </tr>
+                <tr>
+                    <td>
+                        @item.ForecastForDate.DayOfWeek - @item.ForecastForDate.Month/@item.ForecastForDate.Day
+                    </td>
+                    <td>
+                        @item.AverageSurfHeight ft
+                    </td>
+                </tr>
+            }
+            forecastCheck += item.ForecastForDate.DayOfWeek.ToString();
         }
-        forecastCheck += item.ForecastForDate.DayOfWeek.ToString();
-    }
 
-</table>
+    </table>*@

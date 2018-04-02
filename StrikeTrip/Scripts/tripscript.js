@@ -272,7 +272,7 @@ $(document).ready(function () {
 
     var interval = setInterval(function () {
         if ($(window).width() >= 480) {
-            if ($(window).scrollTop() >= 300 && !$("dropdownTag").is(":visible")) {
+            if ($(window).scrollTop() >= 330 && !$("dropdownTag").is(":visible")) {
 
                 $(".standards_and_map").css("visibility", "hidden");
                 $(".standards_and_map").hide();
@@ -302,6 +302,8 @@ $(document).ready(function () {
         }
     }, 250);
 
+
+    
 
 });
 

@@ -70,14 +70,16 @@ namespace StrikeTrip.Controllers
             connectionString = connection[0];
             ViewBag.ServerMessage = connection[1];
             ForecastDaySqlDal forecastDaySql = new ForecastDaySqlDal(connectionString);
-            List<ForecastDay> forecast = forecastDaySql.GetDetailedForecast(id);
+            string spotName = id.Substring(0, id.LastIndexOf("-"));
+            string flightId = id.Substring(id.LastIndexOf("-") + 1);
+            List<ForecastDay> forecast = forecastDaySql.GetDetailedForecast(spotName, flightId);
 
             return View("Forecast", forecast);
         }
 
         public ActionResult ForecastFrame(string id)
         {
-            
+            //gets the iframe url for magic seaweed based on the spot name
             ViewBag.Spot = id.Substring(0, id.LastIndexOf("-"));
             ViewBag.Id = id.Substring(id.LastIndexOf("-")+1);
             return View("ForecastFrame");

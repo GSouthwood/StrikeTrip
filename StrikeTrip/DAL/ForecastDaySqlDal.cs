@@ -16,12 +16,30 @@ namespace StrikeTrip.DAL
         private const string SQL_GetAvgSurfHeightsDefaults = "SELECT TOP 30 Surf.spot_name, AVG(Surf.swell_height_feet) AS historical_avg_surf_height " +
         "FROM Surf GROUP BY Surf.spot_name";
 
-        private const string SQL_GetForecastDaysFromId = "SELECT Surf.spot_name, forecast_for_date, Destination.name, " +
-            "swell_height_feet, wind_direction FROM Surf " +
+        private const string SQL_GetDetailsFromId =
+            "SELECT Surf.spot_name, forecast_for_date, Destination.name, " +
+            "swell_height_feet, Flight.price, Destination.latitude, " +
+            "Flight.origin_airport_code, Destination.airport_code, " +
+            "Destination.longitude, Flight.departure_date, Flight.flight_id, " +
+            "Flight.return_date FROM Surf " +
             "JOIN Destination ON Destination.location_id = Surf.location_id " +
-            "WHERE Surf.spot_name = @spotName AND log_id IN " +
+            "JOIN Flight ON Destination.location_id = Surf.location_id " +
+            "WHERE Surf.spot_name = @spotName AND " +
+            "Flight.flight_id = @flightID AND log_id IN " +
             "(SELECT TOP 80 log_id FROM SURF ORDER BY log_id DESC) " +
             "ORDER BY forecast_for_date ASC;";
+
+        private const string SQL_GetAverages =
+            "SELECT AVG(Surf.swell_height_feet) AS historical_average_surf, " +
+            "MIN(Surf.swell_height_feet) AS historical_min_surf, " +
+            "MAX(Surf.swell_height_feet) AS historical_max_surf, " +
+"AVG(Flight.price) AS historical_average_price, " +
+"MIN(Flight.price) AS historical_min_price, " +
+"MAX(Flight.price) AS historical_max_price " +
+"FROM Surf " +
+"JOIN Destination ON Destination.location_id = Surf.location_id " +
+"JOIN Flight ON Destination.airport_code = Flight.airport_code " +
+"WHERE Surf.spot_name = @spotName";
 
         //private const string SQL_GetForecastDaysFromInput = "SELECT DISTINCT TOP 20 Destination.name, Surf.spot_name, Surf.forecast_for_date, Surf.wind_direction, " +
         //"ROUND(Surf.swell_height_feet, 0) AS avg_surf_height, Surf.log_date, " +
@@ -223,34 +241,47 @@ namespace StrikeTrip.DAL
 
         //historical surf height averages
 
-        public List<ForecastDay> GetDetailedForecast(string id)
+        public List<ForecastDay> GetDetailedForecast(string spotName, string flightId)
         {
             List<ForecastDay> forecastDays = new List<ForecastDay>();
-
+            ForecastDay f = new ForecastDay();
             try
             {
                 using (SqlConnection conn = new SqlConnection(connectionString))
                 {
                     conn.Open();
 
-                    SqlCommand cmd = new SqlCommand(SQL_GetForecastDaysFromId, conn);
-                    cmd.Parameters.AddWithValue("@spotName", id);
+                    SqlCommand cmd = new SqlCommand(SQL_GetDetailsFromId, conn);
+                    cmd.Parameters.AddWithValue("@spotName", spotName);
+                    cmd.Parameters.AddWithValue("@flightId", flightId);
 
                     SqlDataReader reader = cmd.ExecuteReader();
 
                     while (reader.Read())
                     {
-                        ForecastDay f = new ForecastDay();
+
                         f.SpotName = Convert.ToString(reader["spot_name"]);
                         f.ForecastForDate = Convert.ToDateTime(reader["forecast_for_date"]);
                         f.AverageSurfHeight = Convert.ToDecimal(reader["swell_height_feet"]);
-                        f.WindDirection = Convert.ToInt32(reader["wind_direction"]);
                         f.LocationName = Convert.ToString(reader["name"]);
-
+                        f.DepartureDate = Convert.ToDateTime(reader["departure_date"]);
+                        f.DestinationAirportCode = Convert.ToString(reader["airport_code"]);
+                        f.ReturnDate = Convert.ToDateTime(reader["return_date"]);
+                        f.Price = Convert.ToDecimal(reader["price"]);
+                        f.OriginAirportCode = Convert.ToString(reader["origin_airport_code"]);
+                        f.Longitude = Convert.ToString(reader["longitude"]);
+                        f.Latitude = Convert.ToString(reader["latitude"]);
+                        f.FlightId = Convert.ToInt32(reader["flight_id"]);
 
                         forecastDays.Add(f);
+
+
                     }
+
+
+
                 }
+                forecastDays.Add(GetAverages(spotName));
             }
             catch (SqlException)
             {
@@ -260,6 +291,52 @@ namespace StrikeTrip.DAL
 
             return forecastDays;
         }
+
+        public ForecastDay GetAverages(string spotName)
+        {
+
+            ForecastDay f = new ForecastDay();
+            try
+            {
+                using (SqlConnection conn = new SqlConnection(connectionString))
+                {
+                    conn.Open();
+
+                    SqlCommand cmd = new SqlCommand(SQL_GetAverages, conn);
+                    cmd.Parameters.AddWithValue("@spotName", spotName);
+
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+
+                        f.HistoricalMaxHeight = Convert.ToDecimal(reader["historical_max_surf"]);
+                        f.HistoricalMaxPrice = Convert.ToDecimal(reader["historical_max_price"]);
+                        f.HistoricalMinHeight = Convert.ToDecimal(reader["historical_min_surf"]);
+                        f.HistoricalMinPrice = Convert.ToDecimal(reader["historical_min_price"]);
+                        f.HistoricalSurfHeight = Convert.ToDecimal(reader["historical_average_surf"]);
+                        f.HistoticalAveragePrice = Convert.ToDecimal(reader["historical_average_price"]);
+
+
+
+
+                    }
+
+
+
+                }
+            }
+            catch (SqlException)
+            {
+
+                throw;
+            }
+
+            return f;
+        }
+
+
 
         //public List<ForecastDay> GetAvgSurfHeightsDefaults()
         //{

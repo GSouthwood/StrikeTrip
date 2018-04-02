@@ -30,6 +30,9 @@ namespace StrikeTrip.Models
         public DateTime InputReturnDate { get; set; }
         public List<ForecastDay> Forecast { get; set; }
         public int SpotId { get; set; }
+        public string Url { get; set; }
+        public string DestinationAirportCode { get; set; }
+        public string OriginAirportCode { get; set; }
 
         public Trip()
         {
@@ -45,10 +48,6 @@ namespace StrikeTrip.Models
 
         public string FixLatLong(string name, string latitude)
         {
-            //if (!Regex.IsMatch(latOrLong, "^(\\-?\\d+(\\.\\d+)?).\\s*(\\-?\\d+(\\.\\d +)?)$"))
-            //{
-            //    latOrLong = Regex.Replace(latOrLong, "^(\\-?\\d+(\\.\\d+)?).\\s*(\\-?\\d+(\\.\\d +)?)$", "");
-            //}
             
             if (name == "Nicaragua")
             {
@@ -162,6 +161,13 @@ namespace StrikeTrip.Models
             return name + " " + "$" + price;
         }
 
+        public string GetUrl(string destinationCode, string originCode, DateTime departureDate, DateTime returnDate)
+        {
+            string url = "https://www.skyscanner.com/transport/flights/" + originCode + "/" +
+                destinationCode + departureDate.ToString("/yyMMdd/") + returnDate.ToString("yyMMdd") + "?adults=1&children=0&adultsv2=1&childrenv2=&infants=0&" +
+                "cabinclass=economy&rtn=1&preferdirects=false&outboundaltsenabled=false&inboundaltsenabled=false&ref=home#results";
+            return url;
 
+        }
     }
 }

@@ -312,7 +312,7 @@ flightPath2.setMap(map2);
                         @Html.ActionLink("MSW", "ForecastFrame", new { id = item.NameSpotId() }, new { @class = "details_button" })
 
 
-                        <a href="" class="details_button sky">SkyScanner</a>
+                        <a href=@item.GetUrl(item.DestinationAirportCode, item.OriginAirportCode, item.DepartureDate, item.ReturnDate) class="details_button sky">SkyScanner</a>
 
                     </div>
                 </div>
@@ -407,7 +407,7 @@ flightPath2.setMap(map2);
                         $@Math.Truncate(Model[i].Price)
                     </td>
                     <td>
-                        @Html.ActionLink("Forecast", "Forecast", new { id = Model[i].SpotName }, new { @class = "details_button" })
+                        @Html.ActionLink("Forecast", "Forecast", new { id = Model[i].SpotName + "-" + Model[i].FlightId }, new { @class = "details_button" })
                     </td>
                     <td>
                         @Html.ActionLink("MSW", "ForecastFrame", new { id = Model[i].NameSpotId() }, new { @class = "details_button" })
@@ -417,9 +417,12 @@ flightPath2.setMap(map2);
         }
 
     </table>
+
 </div>
 @if (Model.Count == 1 && Model[0].LocationName == null)
 {
 
     <div class="no_flights_table">No trips are available with the selected characteristics.</div>
 }
+
+<p> wave by Carol Ourivio from the Noun Project</p>

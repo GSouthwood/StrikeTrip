@@ -28,7 +28,8 @@ namespace StrikeTrip.DAL
             "ORDER BY Flight.price ASC";
 
         private const string SQL_GetTripsDefault = "SELECT DISTINCT Destination.name, " +
-            "Surf.spot_name, Destination.latitude, Destination.longitude, Flight.departure_date, Flight.return_date, Surf.spot_id, " +
+            "Surf.spot_name, Destination.latitude, Destination.longitude, Flight.departure_date, Flight.return_date, " +
+            "Surf.spot_id, Flight.flight_id, Flight.origin_airport_code, Flight.airport_code, " +
             "MIN(Flight.price) AS min_flight_price, " +
             "COUNT(Surf.log_id) AS num_of_days_with_surf, " +
             "ROUND(MAX(Surf.swell_height_feet), 0) AS max_height FROM Flight " +
@@ -44,91 +45,95 @@ namespace StrikeTrip.DAL
             "ORDER BY Flight.flight_id DESC) " +
             "GROUP BY Destination.name, " +
             "Surf.spot_name, Flight.departure_date, Flight.return_date, Surf.spot_id, " +
-            "Destination.latitude, Destination.longitude " +
+            "Destination.latitude, Destination.longitude, Flight.flight_id, Flight.origin_airport_code, Flight.airport_code " +
             "ORDER BY min_flight_price ASC;";
 
         private const string SQL_GetTripsFromInputReturn = "SELECT DISTINCT Destination.name, " +
-            "Surf.spot_name, Destination.latitude, Destination.longitude, Flight.departure_date, Flight.return_date, Surf.spot_id, " +
+            "Surf.spot_name, Destination.latitude, Destination.longitude, Flight.origin_airport_code, Flight.airport_code, " +
+            "Flight.flight_id, Flight.departure_date, Flight.return_date, Surf.spot_id, " +
             "MIN(Flight.price) AS min_flight_price, " +
             "COUNT(Surf.log_id) AS num_of_days_with_surf, " +
             "ROUND(MAX(Surf.swell_height_feet), 0) AS max_height FROM Flight " +
             "JOIN Destination ON Flight.airport_code = Destination.airport_code " +
             "JOIN Surf ON Destination.location_id = Surf.location_id " +
-            "WHERE swell_height_feet > @inputMinSurfHeight " +            
+            "WHERE swell_height_feet >= @inputMinSurfHeight " +            
             "AND Flight.return_date = @inputReturnDate " +
             "AND Surf.forecast_for_date > Flight.departure_date " +
             "AND Surf.forecast_for_date < @inputReturnDate " +
-            "AND price < @inputMaxPrice " +
+            "AND price <= @inputMaxPrice " +
             "AND Surf.log_id IN (SELECT TOP 56 Surf.log_id FROM Surf " +
             "ORDER BY Surf.log_id DESC) " +
             "AND Flight.flight_id IN (SELECT TOP 96 Flight.flight_id FROM Flight " +
             "ORDER BY Flight.flight_id DESC) " +
             "GROUP BY Destination.name, " +
-            "Surf.spot_name, Flight.departure_date, Flight.return_date, Surf.spot_id, " +
-            "Destination.latitude, Destination.longitude " +
+            "Surf.spot_name, Flight.departure_date, Flight.return_date, Surf.spot_id, Flight.origin_airport_code, Flight.airport_code, " +
+            "Destination.latitude, Destination.longitude, Flight.flight_id " +
             "ORDER BY min_flight_price ASC;";
 
         private const string SQL_GetTripsFromInputDepart = "SELECT DISTINCT Destination.name, " +
-           "Surf.spot_name, Destination.latitude, Destination.longitude, Flight.departure_date, Flight.return_date, Surf.spot_id, " +
+           "Surf.spot_name, Destination.latitude, Destination.longitude, Flight.origin_airport_code, Flight.airport_code, " +
+            "Flight.flight_id, Flight.departure_date, Flight.return_date, Surf.spot_id, " +
            "MIN(Flight.price) AS min_flight_price, " +
            "COUNT(Surf.log_id) AS num_of_days_with_surf, " +
            "ROUND(MAX(Surf.swell_height_feet), 0) AS max_height FROM Flight " +
            "JOIN Destination ON Flight.airport_code = Destination.airport_code " +
            "JOIN Surf ON Destination.location_id = Surf.location_id " +
-           "WHERE swell_height_feet > @inputMinSurfHeight " +
+           "WHERE swell_height_feet >= @inputMinSurfHeight " +
            "AND Flight.departure_date = @inputDepartureDate " +
            "AND Surf.forecast_for_date > @inputDepartureDate " +
            "AND Surf.forecast_for_date < Flight.return_date " +
-           "AND price < @inputMaxPrice " +
+           "AND price <= @inputMaxPrice " +
            "AND Surf.log_id IN (SELECT TOP 56 Surf.log_id FROM Surf " +
            "ORDER BY Surf.log_id DESC) " +
            "AND Flight.flight_id IN (SELECT TOP 96 Flight.flight_id FROM Flight " +
            "ORDER BY Flight.flight_id DESC) " +
            "GROUP BY Destination.name, " +
-           "Surf.spot_name, Flight.departure_date, Flight.return_date, Surf.spot_id, " +
-           "Destination.latitude, Destination.longitude " +
+           "Surf.spot_name, Flight.departure_date, Flight.return_date, Surf.spot_id, Flight.origin_airport_code, Flight.airport_code, " +
+           "Destination.latitude, Destination.longitude, Flight.flight_id " +
            "ORDER BY min_flight_price ASC;";
 
         private const string SQL_GetTripsFromInputBothDates = "SELECT DISTINCT Destination.name, " +
-           "Surf.spot_name, Destination.latitude, Destination.longitude, Flight.departure_date, Flight.return_date, Surf.spot_id, " +
+           "Surf.spot_name, Destination.latitude, Destination.longitude, Flight.origin_airport_code, Flight.airport_code, " +
+            "Flight.flight_id, Flight.departure_date, Flight.return_date, Surf.spot_id, " +
            "MIN(Flight.price) AS min_flight_price, " +
            "COUNT(Surf.log_id) AS num_of_days_with_surf, " +
            "ROUND(MAX(Surf.swell_height_feet), 0) AS max_height FROM Flight " +
            "JOIN Destination ON Flight.airport_code = Destination.airport_code " +
            "JOIN Surf ON Destination.location_id = Surf.location_id " +
-           "WHERE swell_height_feet > @inputMinSurfHeight " +
+           "WHERE swell_height_feet >= @inputMinSurfHeight " +
            "AND Flight.departure_date = @inputDepartureDate " +
            "AND Flight.return_date = @inputReturnDate " +
            "AND Surf.forecast_for_date > @inputDepartureDate " +
            "AND Surf.forecast_for_date < @inputReturnDate " +
-           "AND price < @inputMaxPrice " +
+           "AND price <= @inputMaxPrice " +
            "AND Surf.log_id IN (SELECT TOP 56 Surf.log_id FROM Surf " +
            "ORDER BY Surf.log_id DESC) " +
            "AND Flight.flight_id IN (SELECT TOP 96 Flight.flight_id FROM Flight " +
            "ORDER BY Flight.flight_id DESC) " +
            "GROUP BY Destination.name, " +
-           "Surf.spot_name, Flight.departure_date, Flight.return_date, Surf.spot_id, " +
-           "Destination.latitude, Destination.longitude " +
+           "Surf.spot_name, Flight.departure_date, Flight.return_date, Surf.spot_id, Flight.origin_airport_code, Flight.airport_code, " +
+           "Destination.latitude, Destination.longitude, Flight.flight_id " +
            "ORDER BY min_flight_price ASC;";
 
         private const string SQL_GetTripsFromInputNoDates = "SELECT DISTINCT Destination.name, " +
-            "Surf.spot_name, Destination.latitude, Destination.longitude, Flight.departure_date, Flight.return_date, Surf.spot_id, " +
+            "Surf.spot_name, Destination.latitude, Destination.longitude, Flight.origin_airport_code, Flight.airport_code, " +
+            "Flight.flight_id, Flight.departure_date, Flight.return_date, Surf.spot_id, " +
             "MIN(Flight.price) AS min_flight_price, " +
             "COUNT(Surf.log_id) AS num_of_days_with_surf, " +
             "ROUND(MAX(Surf.swell_height_feet), 0) AS max_height FROM Flight " +
             "JOIN Destination ON Flight.airport_code = Destination.airport_code " +
             "JOIN Surf ON Destination.location_id = Surf.location_id " +
-            "WHERE swell_height_feet > @inputMinSurfHeight " +
+            "WHERE swell_height_feet >= @inputMinSurfHeight " +
             "AND Surf.forecast_for_date > Flight.departure_date " +
             "AND Surf.forecast_for_date < Flight.return_date " +
-            "AND price < @inputMaxPrice " +
+            "AND price <= @inputMaxPrice " +
             "AND Surf.log_id IN (SELECT TOP 56 Surf.log_id FROM Surf " +
             "ORDER BY Surf.log_id DESC) " +
             "AND Flight.flight_id IN (SELECT TOP 96 Flight.flight_id FROM Flight " +
             "ORDER BY Flight.flight_id DESC) " +
             "GROUP BY Destination.name, " +
-            "Surf.spot_name, Flight.departure_date, Flight.return_date, Surf.spot_id, " +
-            "Destination.latitude, Destination.longitude " +
+            "Surf.spot_name, Flight.departure_date, Flight.return_date, Surf.spot_id, Flight.origin_airport_code, Flight.airport_code, " +
+            "Destination.latitude, Destination.longitude, Flight.flight_id " +
             "ORDER BY min_flight_price ASC;";
 
 
@@ -191,7 +196,9 @@ namespace StrikeTrip.DAL
                         t.ReturnDate = Convert.ToDateTime(reader["return_date"]).Date;
                         t.SpotName = Convert.ToString(reader["spot_name"]);
                         t.SpotId = Convert.ToInt32(reader["spot_id"]);
-                        //t.FlightId = Convert.ToInt32(reader["flight_id"]);
+                        t.FlightId = Convert.ToInt32(reader["flight_id"]);
+                        t.OriginAirportCode = Convert.ToString(reader["origin_airport_code"]);
+                        t.DestinationAirportCode = Convert.ToString(reader["airport_code"]);
 
                         trips.Add(t);
                     }
@@ -256,6 +263,9 @@ namespace StrikeTrip.DAL
                         t.ReturnDate = Convert.ToDateTime(reader["return_date"]).Date;
                         t.LocationName = Convert.ToString(reader["name"]);
                         t.SpotId = Convert.ToInt32(reader["spot_id"]);
+                        t.FlightId = Convert.ToInt32(reader["flight_id"]);
+                        t.OriginAirportCode = Convert.ToString(reader["origin_airport_code"]);
+                        t.DestinationAirportCode = Convert.ToString(reader["airport_code"]);
 
                         trips.Add(t);
                     }
@@ -319,6 +329,9 @@ namespace StrikeTrip.DAL
                         t.LocationName = Convert.ToString(reader["name"]);
                         t.DepartureDate = Convert.ToDateTime(reader["return_date"]).Date;
                         t.SpotId = Convert.ToInt32(reader["spot_id"]);
+                        t.FlightId = Convert.ToInt32(reader["flight_id"]);
+                        t.OriginAirportCode = Convert.ToString(reader["origin_airport_code"]);
+                        t.DestinationAirportCode = Convert.ToString(reader["airport_code"]);
 
                         trips.Add(t);
                     }
@@ -371,6 +384,9 @@ namespace StrikeTrip.DAL
                             t.ReturnDate = Convert.ToDateTime(reader["return_date"]).Date;
                             t.SpotName = Convert.ToString(reader["spot_name"]);
                             t.SpotId = Convert.ToInt32(reader["spot_id"]);
+                            t.FlightId = Convert.ToInt32(reader["flight_id"]);
+                            t.OriginAirportCode = Convert.ToString(reader["origin_airport_code"]);
+                            t.DestinationAirportCode = Convert.ToString(reader["airport_code"]);
 
                         trips.Add(t);
                         }
@@ -421,6 +437,7 @@ namespace StrikeTrip.DAL
                         t.ReturnDate = Convert.ToDateTime(reader["return_date"]).Date;
                         t.SpotName = Convert.ToString(reader["spot_name"]);
                         t.SpotId = Convert.ToInt32(reader["spot_id"]);
+
 
                         trips.Add(t);
                     }
