@@ -2,14 +2,14 @@
 $(document).click(function () {
 
 
-    var row = $("tr");
-    var highlightedRow = $(".highlight");
+    var row = $("li.trips");
+    var highlightedRow = $("li.trips.highlight");
     var lat = "";
     var long = "";
 
 
     row.click(function (e) {
-        highlightedRow.removeClass("highlight");
+        highlightedRow.removeClass("highlight");      
         $(this).addClass("highlight");
         lat = $(this).data("lat");
         long = $(this).data("long");
@@ -43,12 +43,12 @@ $(document).click(function () {
         });
 
         if ($(this).attr('id') == "0") {
-            var locationSelection = $("h3.selection");
+            var locationSelection = $("h3.small_selection");
             var newSelection = $(this).data('name');
             locationSelection.html("Best option: " + newSelection);
         }
         else {
-            var locationSelection = $("h3.selection");
+            var locationSelection = $("h3.small_selection");
             var newSelection = $(this).data('name');
             locationSelection.html("Current selection: " + newSelection);
         }
@@ -183,7 +183,9 @@ $(document).keydown(function (e) {
 });
 
 $(document).ready(function () {
-    
+
+    $("div.navbar.navbar-fixed.small_standards_and_map").hide();
+    $(".breaks").hide();
 
     var fade_out = function () {
         $("#temp").fadeOut().empty();
@@ -191,89 +193,115 @@ $(document).ready(function () {
 
     setTimeout(fade_out, 7000);
 
- 
+
     $(".dropdownTag").hide();
     $(".pullupMap").hide();
 
-    var top = $("div#standards");
-    $(".pullup").on("click", function () {
-        top.hide("slow");
-        $(".pullup").hide();
-        $(".dropdownTag").show();
-        $(".dropdownTag").css("top", "11px");
-        $(".dropdownTag").css("height", "30px");
-        $(".dropdownTagMap").css("margin-top", "20px");
-        $(".pullupMap").css("margin-top", "20px");
 
+    $(".pullup").on("click", function () {
+        if ($(window).scrollTop() >= 300) {
+
+            $("div.navbar.navbar-fixed.small_standards_and_map").removeClass("navbar-fixed");
+            $("div.navbar.small_standards_and_map").css("visibility", "hidden");
+            $(".dropdownTag").css("margin-top", "-134px");
+            $(".dropdownTag").css("position", "fixed");
+            $(".pullup").hide();
+            $(".dropdownTag").show();
+
+        }
 
     });
 
     $(".dropdownTag").on("click", function () {
-        if ($(map).is(":visible"))
-        {
 
-        top.show("slow");
+
+        $("div.navbar.small_standards_and_map").addClass("navbar-fixed");
+        $("div.navbar.navbar-fixed.small_standards_and_map").css("visibility", "visible");
         $(".pullup").show();
         $(".dropdownTag").hide();
-        $(".dropdownTagMap").css("margin-top", "0px");
-        $(".dropdownTagMap").css("margin-top", "15px");
-        }
-        else {
-            top.show("slow");
-            $(".pullup").show();
-            $(".dropdownTag").hide();
-            $(".dropdownTagMap").css("margin-top", "0px");
-            $(".dropdownTagMap").css("margin-top", "15px");
-            $(".pullupMap").css("margin-top", "9px");
-        }
-        
+
+
+
 
     });
-    
+
     var map = $("div.form_map");
     $(".dropdownTagMap").on("click", function () {
         if ($("#standards").is(":visible")) {
             map.hide("slow");
-            $(".pullupMap").css("margin", "-1px");
-            $(".pullupMap").css("margin-right", "0px");
-            $(".pullupMap").css("margin-left", "-2px");
-            $(".pullupMap").css("margin-top", "9px");
             $("#standards").css("width", "100%");
             $(".pullupMap").show();
             $(".dropdownTagMap").hide();
         }
         else {
             map.hide("slow");
-            $(".pullupMap").css("margin", "-1px");
-            $(".pullupMap").css("margin-right", "0px");
-            $(".pullupMap").css("margin-left", "-2px");
-            $(".pullupMap").css("margin-top", "17px");
             $("#standards").css("width", "100%");
+            $(".dropdownTag").css("margin-top", "20px");
             $(".pullupMap").show();
             $(".dropdownTagMap").hide();
         }
 
     });
-    
+
     $(".pullupMap").on("click", function () {
-        
 
-
+        if ($(top).is(":visible")) {
             map.show("slow");
             $("#standards").css("width", "45vw");
-            $(".pullupMap").css("margin-top", "20px");
-
             $(".pullupMap").hide();
             $(".dropdownTagMap").show();
+        }
+        else {
+            map.show("slow");
+            $("#standards").css("width", "45vw");
+            $(".dropdownTag").css("margin-top", "0px");
+            $(".pullupMap").hide();
+            $(".dropdownTagMap").show();
+        }
 
 
     });
 
 
 
-    
-        
-    
+
+    /* different standards bar based on where you are on the page*/
+
+
+
+
+    var interval = setInterval(function () {
+        if ($(window).width() >= 480) {
+            if ($(window).scrollTop() >= 300 && !$("dropdownTag").is(":visible")) {
+
+                $(".standards_and_map").css("visibility", "hidden");
+                $(".standards_and_map").hide();
+                $(".breaks").show();
+                $("div.navbar.navbar-fixed.small_standards_and_map").css("visibility", "visible");
+                $("div.navbar.navbar-fixed.small_standards_and_map").show();
+                $(".small_standards_and_map").css("position", "fixed");
+                $("div.navbar-fixed-top").css("margin-bottom", "100px");
+
+
+            }
+        }
+    }, 250);
+
+    var interval = setInterval(function () {
+        if ($(window).scrollTop() <= 250) {
+
+            $(".standards_and_map").css("visibility", "visible");
+            $(".standards_and_map").show();
+            $(".breaks").hide();
+            $("div.navbar.navbar-fixed.small_standards_and_map").css("visibility", "hidden");
+            $("div.navbar.navbar-fixed.small_standards_and_map").hide();
+            $(".small_standards_and_map").css("position", "fixed");
+            $("div.navbar-fixed-top").css("margin-bottom", "100px");
+
+
+        }
+    }, 250);
+
 
 });
 

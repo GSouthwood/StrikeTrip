@@ -39,19 +39,88 @@ var flightPath = new google.maps.Polyline({
     strokeWeight: 1
 });
 
-flightPath.setMap(map);
+    flightPath.setMap(map);
+
+        map2 = new google.maps.Map(document.getElementById("map2"), {
+            zoom: 5,
+            center: center,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+
+    var flightPlanCoordinates2 = [
+
+        { lat: 34.0522, lng: -118.243 },
+        { lat: @lat, lng: @longitude }
+
+
+
+        ];
+var flightPath2 = new google.maps.Polyline({
+    path: flightPlanCoordinates2,
+    geodesic: true,
+    strokeColor: '#FF0000',
+    strokeOpacity: 1.0,
+    strokeWeight: 1
+});
+
+flightPath2.setMap(map2);
 
 });
 
 
 </script>
+<div class="navbar navbar-fixed small_standards_and_map">
 
+    <div id="small_standards">
+        @using (Html.BeginForm("Trips", "Home", FormMethod.Get, new { @id = "small_form_inputs" }))
+            {
+            <div class="container-fluid inputs">
+                <div class="input1">
+                    <div>Your desired...</div>
+                    @Html.TextBox("inputHeight", "", new { @class = "textbox input2", placeholder = "Wave height" })
+                </div>
+
+                <div class="input2">
+
+                    @Html.TextBox("inputPrice", "", new { @class = "textbox input1", placeholder = "Flight price" })
+
+                </div>
+
+
+                <div class="input3">
+
+                    @Html.TextBox("inputDepartureDate", "", new { @class = "textbox input3", placeholder = "Departure date" })
+                </div>
+                <div class="input4">
+
+                    @Html.TextBox("inputReturnDate", "", new { @class = "textbox input4", placeholder = "Return date" })
+                </div>
+                <button style="border-style: none; display: inline-block"><i class="fas fa-search"></i></button>
+
+
+                <div class="small_form_map">
+                    <div id="map" style="width: 100%; height: 80px;"></div>
+                </div>
+                <div style="display: inline-block">
+                    <h3 class="small_selection">Best option: @Model[0].BestOption(Model[0].LocationName, Model[0].Price)</h3>
+                </div>
+            </div>
+        }
+
+    </div>
+    <div>
+        <i class="pullup fas fa-angle-double-up"></i>
+        <i class="dropdownTag fas fa-search"></i>
+    </div>
+
+
+</div>
 
 <div class="standards_and_map">
     <div id="standards">
         <div class="title">Pick Your Standards</div>
         @using (Html.BeginForm("Trips", "Home", FormMethod.Get, new { @id = "form_inputs" }))
-        {
+            {
 
             <div class="container-fluid inputs">
                 <br />
@@ -82,63 +151,123 @@ flightPath.setMap(map);
             <button style="border-style: none"><i class="fas fa-search"></i></button>
         }
     </div>
+
+    <div class="form_map">
+        <h3 class="selection">Best option: @Model[0].BestOption(Model[0].LocationName, Model[0].Price)</h3>
+        <div id="map2" style="width: 100%; height: 200px;"></div>
+    </div>
+
+
+    @{
+        if (Model.Count == 1 && Model[0].LocationName == null)
+        {
+            <div class="container parameters">
+
+                <div class="row">
+
+                    <div class="col-sm-4">
+
+                    </div>
+                    <div class="col-xs-6 col-sm-2">Price: <strong class="no_flights_params">@Model[0].PriceString(Model[0].InputMaxPrice)</strong></div>
+                    <div class="col-xs-6 col-sm-2">Surf height: <strong class="no_flights_params">@Model[0].SurfHeightString(Model[0].InputMinSurfHeight)</strong></div>
+                    <div class="col-sm-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-xs-6 col-sm-2">Departure: <strong class="no_flights_params">@Model[0].DateTimeString(Model[0].InputDepartureDate)</strong></div>
+                    <div class="col-xs-6 col-sm-2">Return: <strong class="no_flights_params">@Model[0].DateTimeString(Model[0].InputReturnDate)</strong></div>
+                    <div class="col-sm-4"></div>
+                </div>
+            </div>
+        }
+        else
+        {
+
+            <div class="container parameters">
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-xs-6 col-sm-2">Price: <strong>@Model[0].PriceString(Model[0].InputMaxPrice)</strong></div>
+                    <div class="col-xs-6 col-sm-2">Surf height: <strong>@Model[0].SurfHeightString(Model[0].InputMinSurfHeight)</strong></div>
+                    <div class="col-sm-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-xs-6 col-sm-2">Departure: <strong>@Model[0].DateTimeString(Model[0].InputDepartureDate)</strong></div>
+                    <div class="col-xs-6 col-sm-2">Return: <strong>@Model[0].DateTimeString(Model[0].InputReturnDate)</strong></div>
+                    <div class="col-sm-4"></div>
+                </div>
+            </div>
+
+
+        }
+    }
+</div>
+
+
+
+<div class="breaks">
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
     <i class="pullup fas fa-angle-double-up"></i>
     <i class="dropdownTag fas fa-search"></i>
-    <div class="form_map">      
-        <h3 class="selection">Best option: @Model[0].BestOption(Model[0].LocationName, Model[0].Price)</h3>
-        <div id="map"></div>
-    </div>
+
+    @{
+        if (Model.Count == 1 && Model[0].LocationName == null)
+        {
+            <div class="container parameters">
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-xs-6 col-sm-2">Price: <strong class="no_flights_params">@Model[0].PriceString(Model[0].InputMaxPrice)</strong></div>
+                    <div class="col-xs-6 col-sm-2">Surf height: <strong class="no_flights_params">@Model[0].SurfHeightString(Model[0].InputMinSurfHeight)</strong></div>
+                    <div class="col-sm-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-xs-6 col-sm-2">Departure: <strong class="no_flights_params">@Model[0].DateTimeString(Model[0].InputDepartureDate)</strong></div>
+                    <div class="col-xs-6 col-sm-2">Return: <strong class="no_flights_params">@Model[0].DateTimeString(Model[0].InputReturnDate)</strong></div>
+                    <div class="col-sm-4"></div>
+                </div>
+            </div>
+        }
+        else
+        {
+
+            <div class="container parameters">
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-xs-6 col-sm-2">Price: <strong>@Model[0].PriceString(Model[0].InputMaxPrice)</strong></div>
+                    <div class="col-xs-6 col-sm-2">Surf height: <strong>@Model[0].SurfHeightString(Model[0].InputMinSurfHeight)</strong></div>
+                    <div class="col-sm-4"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4"></div>
+                    <div class="col-xs-6 col-sm-2">Departure: <strong>@Model[0].DateTimeString(Model[0].InputDepartureDate)</strong></div>
+                    <div class="col-xs-6 col-sm-2">Return: <strong>@Model[0].DateTimeString(Model[0].InputReturnDate)</strong></div>
+                    <div class="col-sm-4"></div>
+                </div>
+            </div>
+
+
+        }
+    }
+
+
 </div>
-<i class="pullupMap far fa-map"></i>
-<i class="dropdownTagMap fas fa-angle-double-down"></i>
-
-@{
-    if (Model.Count == 1 && Model[0].LocationName == null)
-    {
-        <div class="container parameters">
-            <div class="row">
-                <div class="col-sm-4"></div>
-                <div class="col-xs-6 col-sm-2">Price: <strong class="no_flights_params">@Model[0].PriceString(Model[0].InputMaxPrice)</strong></div>
-                <div class="col-xs-6 col-sm-2">Surf height: <strong class="no_flights_params">@Model[0].SurfHeightString(Model[0].InputMinSurfHeight)</strong></div>
-                <div class="col-sm-4"></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4"></div>
-                <div class="col-xs-6 col-sm-2">Departure: <strong class="no_flights_params">@Model[0].DateTimeString(Model[0].InputDepartureDate)</strong></div>
-                <div class="col-xs-6 col-sm-2">Return: <strong class="no_flights_params">@Model[0].DateTimeString(Model[0].InputReturnDate)</strong></div>
-                <div class="col-sm-4"></div>
-            </div>
-        </div>
-    }
-    else
-    {
-
-        <div class="container parameters">
-            <div class="row">
-                <div class="col-sm-4"></div>
-                <div class="col-xs-6 col-sm-2">Price: <strong>@Model[0].PriceString(Model[0].InputMaxPrice)</strong></div>
-                <div class="col-xs-6 col-sm-2">Surf height: <strong>@Model[0].SurfHeightString(Model[0].InputMinSurfHeight)</strong></div>
-                <div class="col-sm-4"></div>
-            </div>
-            <div class="row">
-                <div class="col-sm-4"></div>
-                <div class="col-xs-6 col-sm-2">Departure: <strong>@Model[0].DateTimeString(Model[0].InputDepartureDate)</strong></div>
-                <div class="col-xs-6 col-sm-2">Return: <strong>@Model[0].DateTimeString(Model[0].InputReturnDate)</strong></div>
-                <div class="col-sm-4"></div>
-            </div>
-        </div>
-
-
-    }
-}
-
 @if (Model.Count >= 1 && Model[0].LocationName != null)
 {
-    <ul style="width: 100%">
+    int counter = 0;
+    <ul id="trips_ul" style="width: 100%">
         @foreach (var item in Model)
         {
+            counter++;
             string imgName = "/Content/" + item.SpotName + ".jpg";
-            <li class="trips">
+            <li class="trips" id="@counter" data-name="@item.LocationName $@item.Price" data-lat="@item.FixLatLong(item.LocationName, item.Latitude)" data-long="@item.Longitude">
                 <img src="@imgName" class="spot" alt="@item.LocationName" />
 
                 <div class="trip_info container-fluid">
@@ -233,7 +362,7 @@ flightPath.setMap(map);
         </tr>
 
         @if (Model.Count >= 1 && Model[0].LocationName != null)
-        {
+            {
             <tr id="0" class="highlight" data-name="@Model[0].LocationName $@Model[0].Price" data-lat="@Model[0].FixLatLong(Model[0].LocationName, Model[0].Latitude)" data-long="@Model[0].Longitude">
                 <td>
                     @Model[0].LocationName

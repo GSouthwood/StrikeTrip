@@ -3,6 +3,7 @@
     padding-bottom: 20px;
     background-color: white;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4 {
@@ -96,8 +97,13 @@ button {
     }
 
 .standards_and_map {
-    position: relative;
-    top: 10px;
+    margin-top: -10px;
+    padding-top: 20px;
+}
+
+.selection {
+    margin-left: 80px;
+    min-width: 100px;
 }
 
 #standards {
@@ -111,7 +117,7 @@ button {
     display: inline-block;
     min-height: 100%;
     max-height: 450px;
-    
+    position: relative;
 }
 
 .form_map {
@@ -119,18 +125,119 @@ button {
     min-width: 100px;
     display: inline-block;
     max-height: 300px;
+    margin-left: 40px;
+}
+/*small standards and map*/
+div.navbar.navbar-fixed.small_standards_and_map {
+    visibility: hidden;
+}
+/*computers*/
+@media screen and (min-width: 1150px) {
+    #small_standards {
+        background-color: #8cc78c;
+        padding-top: 5px;
+        padding-bottom: 15px;
+        padding-right: 30px;
+        width: 100vw;
+        min-width: 240px;
+        display: inline-block;
+        min-height: 100%;
+        max-height: 450px;
+        margin-left: -1px;
+        position: relative;
+    }
+
+    .small_form_map {
+        max-width: 200px;
+        min-width: 200px;
+        max-height: 80px;
+        display: inline-block;
+        position: relative;
+        top: 23px;
+        right: -50px;
+    }
+
+    .small_selection {
+        font-size: medium;
+        color: white;
+        width: 150px;
+        position: absolute;
+        right: 0;
+        top: 23px;
+    }
+}
+
+#small_form_inputs {
+    margin-left: 5%;
+    width: 100%;
+}
+/*ipads*/
+@media screen and (max-width: 1149px) {
+    .small_form_map {
+        display: none;
+    }
+
+    .small_selection {
+        display: none;
+    }
+
+    #small_standards {
+        background-color: #8cc78c;
+        padding-top: 25px;
+        padding-bottom: 15px;
+        padding-right: 30px;
+        width: 100vw;
+        min-width: 240px;
+        display: inline-block;
+        min-height: 100%;
+        max-height: 450px;
+        margin-left: -1px;
+        position: relative;
+    }
+}
+/*phones*/
+@media screen and (max-width: 350px) {
+    .selection {
+        font-size: small;
+        width: 150px;
+        margin-left: 0px;
+    }
+
+    .form_map {
+        width: 200px;
+    }
+
+    ul {
+        margin-left: -35px;
+    }
+}
+/*ipads*/
+@media screen and (max-width: 496px) {
+    .small_form_map {
+        display: none;
+    }
+
+    .small_selection {
+        display: none;
+    }
+
+    #small_standards {
+        display: none;
+    }
 }
 
 .pullup {
     background-color: #8cc78c;
+    border: solid;
+    border-color: #8cc78c;
     padding: 7px;
     padding-left: 20px;
     padding-right: 20px;
     text-decoration: none;
     color: white;
-    position: absolute;
-    left: 0;
-    bottom: -28px;
+    display: inline;
+    float: left;
+    margin-left: -1px;
 }
 
     .pullup:hover {
@@ -139,14 +246,16 @@ button {
 
 .dropdownTag {
     background-color: #8cc78c;
+    border: solid;
+    border-color: #8cc78c;
     padding: 7px;
     padding-left: 20px;
     padding-right: 20px;
     text-decoration: none;
     color: white;
-    position: absolute;
-    left: 0;
-    bottom: 0;
+    display: inline;
+    float: left;
+    margin-left: -1px;
 }
 
     .dropdownTag:hover {
@@ -157,14 +266,13 @@ button {
     background-color: white;
     border: solid;
     border-color: #8cc78c;
-    margin: -2px;
     padding: 17px;
     padding-top: 7px;
     padding-bottom: 7px;
     text-decoration: none;
     color: #8cc78c;
     display: inline;
-    float: right;
+    float: left;
 }
 
     .pullupMap:hover {
@@ -175,14 +283,13 @@ button {
     background-color: white;
     border: solid;
     border-color: #8cc78c;
-    margin-top: 0px;
     padding: 7px;
     padding-left: 20px;
     padding-right: 20px;
     text-decoration: none;
     color: #8cc78c;
     display: inline;
-    float: right;
+    float: left;
 }
 
     .dropdownTagMap:hover {
@@ -193,12 +300,6 @@ button {
     margin-left: 15%;
     width: 100%;
 }
-
-.toggles {
-    position: absolute;
-    position: fixed;
-}
-
 
 .toggledUp {
     margin-top: 25px;
@@ -268,19 +369,6 @@ a.sky {
     padding: 10px;
 }
 
-
-
-#map {
-    height: 150px;
-    width: 100%;
-    min-width: 200px;
-    margin-left: 60px;
-    padding-top: 20px;
-}
-.selection {
-    margin-left: 80px;   
-    min-width: 100px;
-}
 .details_button {
     background-color: #222222;
     color: white;
@@ -298,13 +386,15 @@ a.sky {
     margin: 50px 600px 100px 50px;
 }
 
-tr.highlight {
-    border: solid;
-    border-color: #52b544;
-    border-right-style: groove;
-    padding: 2em;
-    color: green;
+li.trips.highlight {
+    -webkit-box-shadow: 0px 2px 2px black;
+    -moz-box-shadow: 0px 2px 2px black;
+    box-shadow: 0px 2px 2px black;
+    color: #609a60;
+    -webkit-text-stroke-width: .2px;
+    -webkit-text-stroke-color: black;
 }
+
 
 .scrollit {
     overflow: scroll;
